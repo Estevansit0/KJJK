@@ -11,5 +11,7 @@ if script_key and script_key ~= "" then
         loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/b77a8a312c23c219f9999f86216096b8.lua"))()
     elseif tostring(game.GameId) == "4069560710" then
         loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/cea901b8ac07971c217016667c549213.lua"))()
+    elseif tostring(game.GameId) == "6504986360" then
+        loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/76246fba0bbe4ead7545226df96e0ce1.lua"))()
     end
 end
