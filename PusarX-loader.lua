@@ -1,17 +1,1 @@
-repeat wait() until game:IsLoaded()
-
-if script_key and script_key ~= "" then
-    if tostring(game.GameId) == "6664476231" then
-        loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/80c7ecb3c4c3572d11f93a827668d010.lua"))()
-    elseif tostring(game.GameId) == "4161970303" then
-        loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/63e793c36cea61b3f023ced8f5c01b21.lua"))()
-    elseif tostring(game.GameId) == "6793832056" then
-        loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/ed3ce8fd051c24a59e6a55665ffafe6f.lua"))()
-    elseif tostring(game.GameId) == "6471449680" then
-        loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/b77a8a312c23c219f9999f86216096b8.lua"))()
-    elseif tostring(game.GameId) == "4069560710" then
-        loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/cea901b8ac07971c217016667c549213.lua"))()
-    elseif tostring(game.GameId) == "6504986360" then
-        loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/76246fba0bbe4ead7545226df96e0ce1.lua"))()
-    end
-end
+repeat wait();until game:IsLoaded() local v0=game:GetService("Players");local v1={["6664476231"]="https://api.luarmor.net/files/v3/loaders/80c7ecb3c4c3572d11f93a827668d010.lua",["4161970303"]="https://api.luarmor.net/files/v3/loaders/63e793c36cea61b3f023ced8f5c01b21.lua",["6793832056"]="https://api.luarmor.net/files/v3/loaders/ed3ce8fd051c24a59e6a55665ffafe6f.lua",["6471449680"]="https://api.luarmor.net/files/v3/loaders/b77a8a312c23c219f9999f86216096b8.lua",["4069560710"]="https://api.luarmor.net/files/v3/loaders/cea901b8ac07971c217016667c549213.lua",["6504986360"]="https://api.luarmor.net/files/v3/loaders/76246fba0bbe4ead7545226df96e0ce1.lua"};if (script_key and (script_key~="")) then local v2=tostring(game.GameId);local v3=v1[v2];if v3 then loadstring(game:HttpGet(v3))();else local v4={};for v5,v6 in pairs(v1) do table.insert(v4,"- GameId: "   .. v5 );end v0.LocalPlayer:Kick("This loader is not supported for this game.\n\n"   .. "Allowed GameIds:\n"   .. table.concat(v4,"\n") );end end
