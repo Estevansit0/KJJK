@@ -1,4 +1,4 @@
--- v3.9 (not obfuscated because its just key system) --
+-- v4.0 (new logo) --
 -- ========================================
 -- SERVICES & INITIALIZATION
 -- GUI FROM SCRIPBLOX (FORGOT ORIGINAL OWNER)
@@ -355,7 +355,7 @@ local function CreateHeader(parent)
     iconImage.Size = UDim2.new(1, 0, 1, 0)
     iconImage.Position = UDim2.new(0, 0, 0, 0)
     iconImage.BackgroundTransparency = 1
-    iconImage.Image = "rbxassetid://102787695963521"
+    iconImage.Image = "rbxassetid://125855589466752"
     iconImage.ImageColor3 = Colors.NeonWhite
     iconImage.ImageTransparency = 0.1
     iconImage.ScaleType = Enum.ScaleType.Fit
