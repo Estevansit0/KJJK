@@ -1,4 +1,4 @@
--- v4.0 (new logo) --
+-- v4.1 (new game supported) --
 -- ========================================
 -- SERVICES & INITIALIZATION
 -- GUI FROM SCRIPBLOX (FORGOT ORIGINAL OWNER)
@@ -82,6 +82,7 @@ local gameIdToURL = {
     ["8421539913"] = "5f0b054d3e43988a88ff9c6b5361600a",
     ["4161970303"] = "f29ded5e442893604294a1a0cfb98a79",
     ["7882829745"] = "485ea33f832a8a3263f40fa6e12be9bb",
+    ["8443571594"] = "6f8aad3aa2d60232e978e1db2f18cbb8",
 }
 
 local errorMessages = {
