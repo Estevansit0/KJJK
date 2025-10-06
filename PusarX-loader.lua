@@ -1,4 +1,4 @@
--- v4.2 (new game supported) --
+-- v4.3 (new game supported) --
 -- ========================================
 -- SERVICES & INITIALIZATION
 -- GUI FROM SCRIPBLOX (FORGOT ORIGINAL OWNER)
@@ -84,6 +84,7 @@ local gameIdToURL = {
     ["7882829745"] = "485ea33f832a8a3263f40fa6e12be9bb",
     ["8443571594"] = "6f8aad3aa2d60232e978e1db2f18cbb8",
     ["8674765068"] = "097edc621d46ccbef92e9f9a0e41bc61",
+    ["6216468795"] = "f9ade440aa24e4ade61df9066f9b339a",
 }
 
 local errorMessages = {
@@ -1085,3 +1086,4 @@ task.spawn(function()
 
     pcall(function() if LuarmorGot_System then LuarmorGot_System:Destroy() end end)
 end)
+
