@@ -85,6 +85,7 @@ local gameIdToURL = {
     ["8443571594"] = "6f8aad3aa2d60232e978e1db2f18cbb8",
     ["8674765068"] = "097edc621d46ccbef92e9f9a0e41bc61",
     ["6216468795"] = "f9ade440aa24e4ade61df9066f9b339a",
+    ["8321616508"] = "68b54db197e247a94e59e2cab8617fef",
 }
 
 local errorMessages = {
