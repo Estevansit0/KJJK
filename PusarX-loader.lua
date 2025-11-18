@@ -1,4 +1,4 @@
--- v4.5 (new game supported) --
+-- v4.6 (upgraded) --
 -- ========================================
 -- SERVICES & INITIALIZATION
 -- GUI FROM SCRIPBLOX (FORGOT ORIGINAL OWNER)
@@ -10,7 +10,7 @@ local Services = {
     TweenService = cloneref(game:GetService("TweenService")),
     UserInputService = cloneref(game:GetService("UserInputService")),
     RunService = cloneref(game:GetService("RunService")),
-    CoreGui = cloneref(game:GetService("CoreGui"))
+    CoreGui = cloneref(game:GetService("CoreGui")),
 }
 
 -- ========================================
@@ -65,8 +65,10 @@ local State = {
 local UI = {}
 
 -- ========================================
--- LUARMOR FUNCTIONS
+-- LUARMOR KEY VALIDATION SYSTEM
 -- ========================================
+
+local KEY_LENGTH = 32
 
 local gameIdToURL = {
     ["6664476231"] = "5ccd093b99591486f2001c115400f454",
@@ -90,31 +92,53 @@ local gameIdToURL = {
 }
 
 local errorMessages = {
-    KEY_EXPIRED = "Key Expired! Please renew your key.",
-    KEY_BANNED = "Your key has been blacklisted. Contact support for details.",
-    KEY_HWID_LOCKED = "Key linked to a different HWID. Please reset it using our bot.",
-    KEY_INCORRECT = "Key is incorrect or has been deleted.",
-    KEY_INVALID = "The provided key is in an invalid format.",
-    SCRIPT_ID_INCORRECT = "The provided script ID does not exist or was deleted.",
-    SCRIPT_ID_INVALID = "The script ID is in an invalid format.",
-    INVALID_EXECUTOR = "HWID header contains invalid data. Executor might not be supported.",
-    SECURITY_ERROR = "Security error detected. Cloudflare validation failed.",
-    TIME_ERROR = "Client time is invalid. Ensure your system clock is correct.",
-    UNKNOWN_ERROR = "Unknown server error. Please contact support."
+    KEY_VALID = "✅ Key is valid! Loading script...",
+    KEY_EXPIRED = "❌ Key has expired! Please renew your key.",
+    KEY_BANNED = "🚫 Your key has been blacklisted. Contact support for details.",
+    KEY_HWID_LOCKED = "🔒 Key linked to a different HWID. Please reset it using our bot.",
+    KEY_INCORRECT = "❌ Key is incorrect or has been deleted.",
+    KEY_INVALID = "⚠️ The provided key is in an invalid format.",
+    SCRIPT_ID_INCORRECT = "❌ The provided script ID does not exist or was deleted.",
+    SCRIPT_ID_INVALID = "⚠️ The script ID is in an invalid format.",
+    INVALID_EXECUTOR = "⚠️ HWID header contains invalid data. Executor might not be supported.",
+    SECURITY_ERROR = "🛡️ Security error detected. Cloudflare validation failed.",
+    TIME_ERROR = "⏰ Client time is invalid. Ensure your system clock is correct.",
+    UNKNOWN_ERROR = "❓ Unknown server error. Please contact support at gg/luarmor."
 }
 
 local api = loadstring(game:HttpGet("https://sdkapi-public.luarmor.net/library.lua"))()
 
-
 function Validation(key, file)
-    api.script_id = gameIdToURL[tostring(game.GameId)]
-
-    local cleanedKey = key:gsub("%s", "")
-
-    if cleanedKey ~= key then
-        ShowStatus("Spaces detected in the key. Verifying the key without spaces...", false, false)
+    local scriptId = gameIdToURL[tostring(game.GameId)]
+    
+    if not scriptId then
+        ShowStatus("⚠️ This game is not supported!", true, false)
+        return nil
     end
 
+    api.script_id = scriptId
+
+    local cleanedKey = key:gsub("%s", "")
+    
+    if cleanedKey ~= key then
+        ShowStatus("🔧 Spaces detected in the key. Cleaning...", false, false)
+    end
+
+    if #cleanedKey ~= KEY_LENGTH then
+        ShowStatus(
+            string.format("⚠️ Invalid key length! Expected %d characters, got %d.", KEY_LENGTH, #cleanedKey),
+            true,
+            false
+        )
+        return nil
+    end
+
+    if not cleanedKey:match("^[%w]+$") then
+        ShowStatus("⚠️ Key contains invalid characters! Only letters and numbers allowed.", true, false)
+        return nil
+    end
+
+    ShowStatus("🔍 Verifying key...", false, false)
     local status = api.check_key(cleanedKey)
 
     if status.code == "KEY_VALID" then
@@ -137,51 +161,117 @@ function Validation(key, file)
         if status.data then
             local expire = status.data.auth_expire
             local execCount = status.data.total_executions or 0
+            local note = status.data.note or ""
 
-            if execCount > 0 then
-                if expire == -1 or expire == 0 then
-                    ShowStatus("🔓 Key Status: Lifetime Access", false, true)
-                else
-                    local timeLeft = expire - os.time()
-                    if timeLeft > 0 then
-                        local formattedTime = string.format(
-                            "%02d:%02d:%02d",
-                            math.floor(timeLeft / 3600),
-                            math.floor((timeLeft % 3600) / 60),
-                            timeLeft % 60
-                        )
-                        ShowStatus("⏳ Time Left: " .. formattedTime, false, true)
+            if note == "Ad Reward" then
+                ShowStatus("🎁 Key from Ad Reward system detected!", false, false)
+            end
+
+            if expire == -1 or expire == 0 then
+                ShowStatus("🔓 Key Status: Lifetime Access", false, true)
+            else
+                local timeLeft = expire - os.time()
+                if timeLeft > 0 then
+                    local days = math.floor(timeLeft / 86400)
+                    local hours = math.floor((timeLeft % 86400) / 3600)
+                    local minutes = math.floor((timeLeft % 3600) / 60)
+                    local seconds = timeLeft % 60
+                    
+                    local formattedTime
+                    if days > 0 then
+                        formattedTime = string.format("%dd %02dh %02dm", days, hours, minutes)
+                    else
+                        formattedTime = string.format("%02d:%02d:%02d", hours, minutes, seconds)
                     end
+                    
+                    ShowStatus("⏳ Time Left: " .. formattedTime, false, true)
+                else
+                    ShowStatus("❌ Key has expired!", true, false)
+                    return nil
                 end
             end
-            ShowStatus("Total executions: " .. execCount, false, false)
+
+            ShowStatus("📊 Total Executions: " .. execCount, false, false)
         end
+        
+        ShowStatus(errorMessages[status.code], false, true)
 
         script_key = cleanedKey
         return true
     end
 
-    if errorMessages[status.code] then
-        delfile(file)
-        ShowStatus(errorMessages[status.code], false, false)
+    if status.code == "KEY_HWID_LOCKED" then
+        if isfile(file) then
+            delfile(file)
+        end
+        ShowStatus(errorMessages[status.code], true, false)
+        return nil
+    end
 
-        if table.find({ "INVALID_EXECUTOR", "SECURITY_ERROR", "UNKNOWN_ERROR" }, status.code) then
-            task.wait(1)
+    if status.code == "KEY_INCORRECT" then
+        if isfile(file) then
+            delfile(file)
+        end
+        ShowStatus(errorMessages[status.code], true, false)
+        return nil
+    end
+
+    if errorMessages[status.code] then
+        if isfile(file) then
+            delfile(file)
+        end
+        ShowStatus(errorMessages[status.code], true, false)
+
+        if table.find({"INVALID_EXECUTOR", "SECURITY_ERROR", "UNKNOWN_ERROR"}, status.code) then
+            task.wait(2)
             pcall(function()
-                Services.Players.LocalPlayer:Kick(errorMessages[status.code])
+                Services.Players.LocalPlayer:Kick("❌ " .. errorMessages[status.code])
             end)
         end
-
+        
         return nil
     end
 
     ShowStatus(
-        "Key check failed: " ..
-        (status.message or "no message") ..
-        " Code: " .. status.code,
+        "❌ Key check failed: " ..
+        (status.message or "Unknown error") ..
+        " | Code: " .. status.code,
         true,
         false
     )
+    
+    return nil
+end
+
+
+function DraggFunction(object, dragObject, enableTaptic, tapticOffset)
+    local dragging, relative = false, nil
+    local offset = object:FindFirstAncestorWhichIsA("ScreenGui") and game:GetService("GuiService"):GetGuiInset() or Vector2.zero
+
+    dragObject.InputBegan:Connect(function(input, processed)
+        if processed then return end
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            dragging = true
+            relative = object.AbsolutePosition + object.AbsoluteSize * object.AnchorPoint - Services.UserInputService:GetMouseLocation()
+        end
+    end)
+
+    Services.UserInputService.InputEnded:Connect(function(input)
+        if dragging and (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then
+            dragging = false
+        end
+    end)
+
+    Services.RunService.RenderStepped:Connect(function()
+        if dragging then
+            local position = Services.UserInputService:GetMouseLocation() + relative + offset
+            if enableTaptic and tapticOffset then
+                Services.TweenService:Create(object, TweenInfo.new(0.4, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Position = UDim2.fromOffset(position.X, position.Y)}):Play()
+            else
+                object.Position = UDim2.fromOffset(position.X, position.Y)
+            end
+        end
+    end)
 end
 
 -- ========================================
@@ -221,7 +311,7 @@ local function CreateBackdrop(parent)
     backdrop.Name = "Backdrop"
     backdrop.Size = UDim2.new(1, 0, 1, 0)
     backdrop.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-    backdrop.BackgroundTransparency = 0.1
+    backdrop.BackgroundTransparency = 0.6
     backdrop.BorderSizePixel = 0
     backdrop.ZIndex = 100
     backdrop.Parent = parent
@@ -254,7 +344,20 @@ local function CreateContainer(parent)
 
     local uiScale = Instance.new("UIScale")
     uiScale.Parent = container
-    uiScale.Scale = 0.8
+
+    local function updateScale()
+        local cam = workspace.CurrentCamera
+        if not cam then return end
+        local size = cam.ViewportSize
+        local scaleX = size.X / 1920
+        local scaleY = size.Y / 1080
+        uiScale.Scale = math.clamp(math.min(scaleX, scaleY), 0.6, 1.2)
+    end
+
+    updateScale()
+
+    workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(updateScale)
+    game:GetService("RunService").RenderStepped:Connect(updateScale)
 
     UI.Container = container
     return container
@@ -308,8 +411,9 @@ local function CreateHeader(parent)
     header.Size = UDim2.new(1, 0, 0, 100)
     header.BackgroundTransparency = 1
     header.ZIndex = 11
-    header.Selectable = false
     header.Parent = parent
+
+    DraggFunction(parent, header, true, 0)
 
     local iconContainer = Instance.new("Frame")
     iconContainer.Size = UDim2.new(0, 56, 0, 56)
@@ -317,7 +421,6 @@ local function CreateHeader(parent)
     iconContainer.BackgroundColor3 = Colors.Primary
     iconContainer.BorderSizePixel = 0
     iconContainer.ZIndex = 12
-    iconContainer.Selectable = false
     iconContainer.Parent = header
 
     local iconCorner = Instance.new("UICorner")
@@ -329,7 +432,6 @@ local function CreateHeader(parent)
     iconGlow.Position = UDim2.new(0, -6, 0, -6)
     iconGlow.BackgroundTransparency = 1
     iconGlow.ZIndex = 11
-    iconGlow.Selectable = false
     iconGlow.Parent = iconContainer
 
     local glowCorner = Instance.new("UICorner")
@@ -343,12 +445,12 @@ local function CreateHeader(parent)
     glowStroke.Parent = iconGlow
 
     local glowGradient = Instance.new("UIGradient")
-    glowGradient.Color = ColorSequence.new {
+    glowGradient.Color = ColorSequence.new{
         ColorSequenceKeypoint.new(0, Color3.fromRGB(114, 137, 218)),
         ColorSequenceKeypoint.new(0.5, Color3.fromRGB(88, 101, 242)),
         ColorSequenceKeypoint.new(1, Color3.fromRGB(114, 137, 218))
     }
-    glowGradient.Transparency = NumberSequence.new {
+    glowGradient.Transparency = NumberSequence.new{
         NumberSequenceKeypoint.new(0, 0.8),
         NumberSequenceKeypoint.new(0.2, 0.05),
         NumberSequenceKeypoint.new(0.8, 0.05),
@@ -358,7 +460,6 @@ local function CreateHeader(parent)
 
     local iconImage = Instance.new("ImageLabel")
     iconImage.Size = UDim2.new(1, 0, 1, 0)
-    iconImage.Position = UDim2.new(0, 0, 0, 0)
     iconImage.BackgroundTransparency = 1
     iconImage.Image = "rbxassetid://125855589466752"
     iconImage.ImageColor3 = Colors.NeonWhite
@@ -371,9 +472,56 @@ local function CreateHeader(parent)
     iconImageCorner.CornerRadius = UDim.new(0, 14)
     iconImageCorner.Parent = iconImage
 
-    UI.Header = { Container = header, IconGlow = glowGradient, IconStroke = glowStroke }
+    local closeButton = Instance.new("TextButton")
+    closeButton.Size = UDim2.new(0, 40, 0, 40)
+    closeButton.Position = UDim2.new(1, -85, 0, 30)
+    closeButton.BackgroundTransparency = 1
+    closeButton.Text = "X"
+    closeButton.TextScaled = true
+    closeButton.TextColor3 = Colors.NeonWhite
+    closeButton.BorderSizePixel = 0
+    closeButton.ZIndex = 15
+    closeButton.Parent = header
+
+    local closeGlow = Instance.new("UIStroke")
+    closeGlow.Color = Colors.NeonWhite
+    closeGlow.Thickness = 2
+    closeGlow.Transparency = 0.1
+    closeGlow.Parent = closeButton
+
+    local gradient = Instance.new("UIGradient")
+    gradient.Color = ColorSequence.new{
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(88, 101, 242)),
+        ColorSequenceKeypoint.new(0.5, Color3.fromRGB(150, 170, 255)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(88, 101, 242))
+    }
+    gradient.Rotation = 0
+    gradient.Parent = closeButton
+
+    task.spawn(function()
+        while closeButton.Parent do
+            for i = 0, 360, 2 do
+                gradient.Rotation = i
+                task.wait(0.01)
+            end
+        end
+    end)
+
+    closeButton.MouseButton1Down:Connect(function()
+        closeButton.TextColor3 = Color3.fromRGB(255, 70, 70)
+        closeGlow.Thickness = 3
+    end)
+
+    closeButton.MouseButton1Up:Connect(function()
+        closeButton.TextColor3 = Colors.NeonWhite
+        closeGlow.Thickness = 2
+        parent.parent:Destroy()
+    end)
+
+    UI.Header = {Container = header, IconGlow = glowGradient, IconStroke = glowStroke}
     return header
 end
+
 
 -- ========================================
 -- CONTENT SECTION
@@ -1018,7 +1166,7 @@ local function PlayEntranceAnimation()
 
     Services.TweenService:Create(UI.Backdrop,
         TweenInfo.new(0.3, Enum.EasingStyle.Quad),
-        { BackgroundTransparency = 0.2 }):Play()
+        { BackgroundTransparency = 0.8 }):Play()
 
     task.wait(0.1)
 
@@ -1060,12 +1208,11 @@ end
 Initialize()
 
 task.spawn(function()
-    local valid = false
-    local key = script_key
+    local valid;
 
-    if key and key ~= "" then
+    if script_key and script_key ~= "" then
         ShowStatus("Found key in script_key variable. Waiting for key system to fully load...", false, false)
-        valid = Validation(key, "PulsarKey.txt")
+        valid = Validation(script_key, "PulsarKey.txt")
     else
         local success, result = pcall(function()
             return readfile and isfile and isfile("PulsarKey.txt") and readfile("PulsarKey.txt")
