@@ -1,7 +1,6 @@
--- v4.6 (upgraded) --
+-- v4.7 (fixed lag) --
 -- ========================================
 -- SERVICES & INITIALIZATION
--- GUI FROM SCRIPBLOX (FORGOT ORIGINAL OWNER)
 if not game:IsLoaded() then game.Loaded:Wait() end
 -- ========================================
 local cloneref = cloneref or function(o) return o end
@@ -345,19 +344,15 @@ local function CreateContainer(parent)
     local uiScale = Instance.new("UIScale")
     uiScale.Parent = container
 
-    local function updateScale()
-        local cam = workspace.CurrentCamera
-        if not cam then return end
+    local cam = workspace.CurrentCamera
+    if cam then
         local size = cam.ViewportSize
         local scaleX = size.X / 1920
         local scaleY = size.Y / 1080
         uiScale.Scale = math.clamp(math.min(scaleX, scaleY), 0.6, 1.2)
+    else
+        uiScale.Scale = 0.9
     end
-
-    updateScale()
-
-    workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(updateScale)
-    game:GetService("RunService").RenderStepped:Connect(updateScale)
 
     UI.Container = container
     return container
