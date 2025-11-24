@@ -1,4 +1,4 @@
--- v4.7 (fixed lag) --
+-- v5.0 (Removed support for some games) --
 -- ========================================
 -- SERVICES & INITIALIZATION
 if not game:IsLoaded() then game.Loaded:Wait() end
@@ -70,24 +70,14 @@ local UI = {}
 local KEY_LENGTH = 32
 
 local gameIdToURL = {
-    ["6664476231"] = "5ccd093b99591486f2001c115400f454",
-    ["4069560710"] = "01e31cb43a472d28871f37ee45d9f21a",
-    ["7709344486"] = "51d3af0c95c2202166bf716b5a120203",
-    ["7893515528"] = "a556abe9fa2b561d8192e9a158261e3f",
-    ["7824062257"] = "3e2b15157055b6fe3260e664ac64561a",
-    ["7332711118"] = "be874f306da8948c7636f090c7222b46",
-    ["8353463684"] = "f20308f0ed1bda379499756217f0f4b5",
-    ["8380556170"] = "7736dfe2074079ac0c0a6e5705af7931",
-    ["6471449680"] = "45369c812f2445631b1c96bb732302b8",
-    ["7907828295"] = "778f636999c65ee7519d71d01f37bdce",
-    ["8421539913"] = "5f0b054d3e43988a88ff9c6b5361600a",
-    ["4161970303"] = "f29ded5e442893604294a1a0cfb98a79",
-    ["7882829745"] = "485ea33f832a8a3263f40fa6e12be9bb",
-    ["8443571594"] = "6f8aad3aa2d60232e978e1db2f18cbb8",
-    ["8674765068"] = "097edc621d46ccbef92e9f9a0e41bc61",
-    ["6216468795"] = "f9ade440aa24e4ade61df9066f9b339a",
-    ["8321616508"] = "68b54db197e247a94e59e2cab8617fef",
-    ["8842956505"] = "331a2f8ab38bff0e9c047964ebc41ce8",
+    ["6664476231"] = "5ccd093b99591486f2001c115400f454", -- Fruit Reborn
+    ["4069560710"] = "01e31cb43a472d28871f37ee45d9f21a", -- One Fruit Simulator
+    ["7709344486"] = "51d3af0c95c2202166bf716b5a120203", -- Steal a Brainrot
+    ["7332711118"] = "be874f306da8948c7636f090c7222b46", -- Brainrot Evolution
+    ["4161970303"] = "f29ded5e442893604294a1a0cfb98a79", -- Anime Spirits
+    ["8443571594"] = "6f8aad3aa2d60232e978e1db2f18cbb8", -- Fruit Forager
+    ["6216468795"] = "f9ade440aa24e4ade61df9066f9b339a", -- Weak Legacy 2
+    ["8321616508"] = "68b54db197e247a94e59e2cab8617fef", -- Rogue Piece
 }
 
 local errorMessages = {
