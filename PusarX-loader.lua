@@ -1,4 +1,4 @@
--- v5.0 (Removed support for some games) --
+-- v5.1 (Added Pickaxe Simulator! ⛏️) --
 -- ========================================
 -- SERVICES & INITIALIZATION
 if not game:IsLoaded() then game.Loaded:Wait() end
@@ -78,6 +78,7 @@ local gameIdToURL = {
     ["8443571594"] = "6f8aad3aa2d60232e978e1db2f18cbb8", -- Fruit Forager
     ["6216468795"] = "f9ade440aa24e4ade61df9066f9b339a", -- Weak Legacy 2
     ["8321616508"] = "68b54db197e247a94e59e2cab8617fef", -- Rogue Piece
+    ["8832884753"] = "660505cd7637b83d8d3d88ecc3882cd9", -- Pickaxe Simulator!
 }
 
 local errorMessages = {
