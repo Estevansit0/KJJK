@@ -1,2 +1,1195 @@
---! Brainrot Sniper
-if not LPH_OBFUSCATED then LPH_JIT=function(...)return...end;LPH_ENCSTR=function(...)return...end;LPH_NO_VIRTUALIZE=function(...)return...end end;if not game:IsLoaded()then game.Loaded:Wait()end;local cloneref=cloneref or function(a)return a end;local function b(c)return cloneref(game:GetService(c))end;local d=b("CoreGui")local e=b("TweenService")local f=b("HttpService")local function g(h)local i,j=pcall(function()return f:JSONDecode(h)end)if i then return j end end;local k="PulsarAssets"if makefolder and not isfolder(k)then makefolder(k)end;local l={MainBG=Color3.fromRGB(12,12,16),SecondaryBG=Color3.fromRGB(18,18,24),TertiaryBG=Color3.fromRGB(24,24,32),Accent=Color3.fromRGB(110,80,255),AccentGlow=Color3.fromRGB(140,110,255),TextPrimary=Color3.fromRGB(255,255,255),TextSecondary=Color3.fromRGB(140,150,170),Stroke=Color3.fromRGB(35,35,45),Success=Color3.fromRGB(40,220,140),Warn=Color3.fromRGB(255,170,40),Error=Color3.fromRGB(255,70,90)}pcall(function()if getgenv().LuarmorGot_System then getgenv().LuarmorGot_System:Destroy()end end)local m=Instance.new("ScreenGui")m.Name="PulsarKeySystem"m.IgnoreGuiInset=true;m.ZIndexBehavior=Enum.ZIndexBehavior.Sibling;getgenv().LuarmorGot_System=m;if gethui then m.Parent=gethui()else m.Parent=d end;local n={{Name="pulsarx",Type="discord",Id="pulsarx"},{Name="key",Type="icon"},{Name="link",Type="icon"},{Name="gamepad-2",Type="icon"},{Name="loader-2",Type="icon"},{Name="check",Type="icon"},{Name="wifi-off",Type="icon"},{Name="alert-circle",Type="icon"},{Name="lock-keyhole-open",Type="icon"},{Name="x",Type="icon"},{Name="chevron-right",Type="icon"},{Name="shield",Type="icon"}}local function o()for p,q in ipairs(n)do local r=q.Type=="discord"and".jpg"or".png"local s=k.."/"..q.Name..r;if not isfile(s)then local t;if q.Type=="icon"then t="https://raw.githubusercontent.com/latte-soft/lucide-roblox/master/icons/compiled/256px/"..q.Name..".png"elseif q.Type=="discord"then local i,j=pcall(function()return game:HttpGet("https://discord.com/api/v10/invites/"..q.Id.."?with_counts=false&with_expiration=false")end)if i and j then local u=g(j)if u and u.guild and u.guild.icon then t="https://cdn.discordapp.com/icons/%s/%s.png?size=256":format(u.guild.id,u.guild.icon)end end end;if t then local i,v=pcall(function()return game:HttpGet(t)end)if i and v then writefile(s,v)end end end end end;o()local w={get=function(x)local r=x=="pulsarx"and".jpg"or".png"local s=k.."/"..x..r;if isfile(s)then return getcustomasset(s)end;return"rbxassetid://0"end}local y={["6664476231"]="5ccd093b99591486f2001c115400f454",["4069560710"]="01e31cb43a472d28871f37ee45d9f21a",["7709344486"]="51d3af0c95c2202166bf716b5a120203",["7332711118"]="be874f306da8948c7636f090c7222b46",["4161970303"]="f29ded5e442893604294a1a0cfb98a79",["8443571594"]="6f8aad3aa2d60232e978e1db2f18cbb8",["6216468795"]="f9ade440aa24e4ade61df9066f9b339a",["8321616508"]="68b54db197e247a94e59e2cab8617fef",["8832884753"]="660505cd7637b83d8d3d88ecc3882cd9",["8779464785"]="0c16aabca6ba4f89d5a4fb232eb39f65",["8916375040"]="6c5fef915a2939142f857fd8098662d4",["9186719164"]="13d1621b60dce0465d5baea7ffc9c9f7",["9671940985"]="27a561f5e2606ee11865ef31ead65df1",["9679625425"]="1f9877cc257889d71f46c554915d07eb",["9510293839"]="928d148d9d15c8151cc73dded45f6975",["9709606565"]="f7e40f1ac25c05097c992e5b1f14def9",["9133163823"]="31d50c8ffbeaa38a577f38e279cc81be",["9751761702"]="2edbe1c84f93b1f80ee4889915bfdcb1",["7178032757"]="577218de3c588c3ef155af46262499e2",["9917246399"]="a62365c7600cc42338fc374e0924a98c",["10004244222"]="ac39eac78e792f40d363716be26d5047",["9792947201"]="b9a6c6d6349c51c5bf0be33b37d80974",["6409513651"]="8daa812353e296b08bcc6bb18c2aed15",["9654716970"]="0cfec26e9dffcd02142df0dfa1205e9f",["10143502462"]="49d9e8f6d939bb2e3c30b4c4029f2b0b",["9860860377"]="e89b2a9d39319e9db2caba7c3df6d279",["6391458589"]="626411dc79e5f5381fd7ec25c8e10553",["10093833731"]="cb12c13a7e923106310362b89f94beb8",["10067868611"]="67abdc09ec99469ba156d58aaa2de054"}local z={HeaderTitle=LPH_ENCSTR("PULSAR X"),Subtitle=LPH_ENCSTR("Authentication System"),KeyLink=LPH_ENCSTR("https://pulsarx.net/"),DiscordLink=LPH_ENCSTR("https://discord.gg/yRr847zGvC"),ResetHWIDLink=LPH_ENCSTR("https://pulsarx.net/resethwid/"),FileName=LPH_ENCSTR("PulsarKey_Save.txt")}local A=LPH_NO_VIRTUALIZE(function()return loadstring(game:HttpGet("https://sdkapi-public.luarmor.net/library.lua"))()end)()local B=y[tostring(game.GameId)]local C=false;if A and B then A.script_id=B;C=true end;local D=Instance.new("Frame")D.Size=UDim2.new(0,300,1,0)D.AnchorPoint=Vector2.new(1,1)D.Position=UDim2.new(1,-20,1,-20)D.BackgroundTransparency=1;D.Parent=m;local E={}local F=LPH_JIT(function()for G,H in ipairs(E)do local I=0;for J=1,G-1 do if E[J]and E[J].Instance then I=I+E[J].Instance.Size.Y.Offset+12 end end;e:Create(H.Instance,TweenInfo.new(0.5,Enum.EasingStyle.Exponential,Enum.EasingDirection.Out),{Position=UDim2.new(0,0,1,-I)}):Play()end end)local function K(L,M,N,O)local P=l.Success;local Q="check"if N=="Warn"then P=l.Warn;Q="alert-circle"elseif N=="Error"then P=l.Error;Q="x"end;local R=Instance.new("Frame")R.Size=UDim2.new(1,0,0,60)R.AnchorPoint=Vector2.new(0,1)R.Position=UDim2.new(1,350,1,0)R.BackgroundColor3=l.MainBG;R.BorderSizePixel=0;R.Parent=D;local S=Instance.new("UICorner")S.CornerRadius=UDim.new(0,8)S.Parent=R;local T=Instance.new("UIStroke")T.Color=l.Stroke;T.Thickness=1;T.Parent=R;local U=Instance.new("Frame")U.Size=UDim2.new(0,3,1,-16)U.Position=UDim2.new(0,8,0.5,0)U.AnchorPoint=Vector2.new(0,0.5)U.BackgroundColor3=P;U.BorderSizePixel=0;U.Parent=R;local V=Instance.new("UICorner")V.CornerRadius=UDim.new(1,0)V.Parent=U;local W=Instance.new("ImageLabel")W.Size=UDim2.new(0,18,0,18)W.Position=UDim2.new(0,20,0.5,0)W.AnchorPoint=Vector2.new(0,0.5)W.BackgroundTransparency=1;W.Image=w.get(Q)W.ImageColor3=P;W.Parent=R;local X=Instance.new("TextLabel")X.Size=UDim2.new(1,-60,0,18)X.Position=UDim2.new(0,48,0,10)X.BackgroundTransparency=1;X.Text=L;X.TextColor3=l.TextPrimary;X.Font=Enum.Font.GothamBold;X.TextSize=13;X.TextXAlignment=Enum.TextXAlignment.Left;X.Parent=R;local Y=Instance.new("TextLabel")Y.Size=UDim2.new(1,-60,0,16)Y.Position=UDim2.new(0,48,0,30)Y.BackgroundTransparency=1;Y.Text=M;Y.TextColor3=l.TextSecondary;Y.Font=Enum.Font.Gotham;Y.TextSize=11;Y.TextXAlignment=Enum.TextXAlignment.Left;Y.TextWrapped=true;Y.Parent=R;local Z={Instance=R}table.insert(E,1,Z)if#E>4 then local _=table.remove(E,#E)if _ and _.Instance then e:Create(_.Instance,TweenInfo.new(0.4,Enum.EasingStyle.Exponential,Enum.EasingDirection.In),{Position=UDim2.new(1,350,1,_.Instance.Position.Y.Offset)}):Play()task.delay(0.4,function()_.Instance:Destroy()end)end end;F()task.spawn(function()task.wait(O or 4)if R and R.Parent then local a0=nil;for G,a1 in ipairs(E)do if a1.Instance==R then a0=G;break end end;if a0 then table.remove(E,a0)e:Create(R,TweenInfo.new(0.4,Enum.EasingStyle.Exponential,Enum.EasingDirection.In),{Position=UDim2.new(1,350,1,R.Position.Y.Offset)}):Play()task.delay(0.4,function()R:Destroy()end)F()end end end)end;local a2=Instance.new("CanvasGroup")a2.Size=UDim2.new(0,360,0,350)a2.Position=UDim2.new(0.5,0,0.5,40)a2.AnchorPoint=Vector2.new(0.5,0.5)a2.BackgroundColor3=l.MainBG;a2.BorderSizePixel=0;a2.GroupTransparency=1;a2.Parent=m;local a3=Instance.new("UICorner")a3.CornerRadius=UDim.new(0,12)a3.Parent=a2;local a4=Instance.new("UIStroke")a4.Color=l.Stroke;a4.Thickness=1;a4.Parent=a2;local a5=Instance.new("Frame")a5.Size=UDim2.new(1,0,0,3)a5.Position=UDim2.new(0,0,0,0)a5.BackgroundColor3=l.Accent;a5.BorderSizePixel=0;a5.ZIndex=2;a5.Parent=a2;local a6=Instance.new("UIScale")a6.Parent=a2;local function a7()local a8=workspace.CurrentCamera.ViewportSize;local a9=a8.X;local aa=a8.Y;if a9<500 or aa<500 then a6.Scale=math.clamp(math.min(a9/380,aa/380),0.7,1)else a6.Scale=1 end end;workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(a7)a7()e:Create(a2,TweenInfo.new(0.7,Enum.EasingStyle.Exponential,Enum.EasingDirection.Out),{Position=UDim2.new(0.5,0,0.5,0),GroupTransparency=0}):Play()local ab=Instance.new("Frame")ab.Size=UDim2.new(1,0,0,80)ab.Position=UDim2.new(0,0,0,0)ab.BackgroundTransparency=1;ab.Parent=a2;local ac=Instance.new("ImageLabel")ac.Size=UDim2.new(0,42,0,42)ac.Position=UDim2.new(0,20,0.5,0)ac.AnchorPoint=Vector2.new(0,0.5)ac.BackgroundTransparency=1;ac.Image=w.get("pulsarx")ac.Parent=ab;local ad=Instance.new("UICorner")ad.CornerRadius=UDim.new(0,10)ad.Parent=ac;local ae=Instance.new("TextLabel")ae.Position=UDim2.new(0,75,0.5,-10)ae.AnchorPoint=Vector2.new(0,0.5)ae.Size=UDim2.new(0,200,0,20)ae.BackgroundTransparency=1;ae.Text=z.HeaderTitle;ae.TextColor3=l.TextPrimary;ae.Font=Enum.Font.GothamBlack;ae.TextSize=18;ae.TextXAlignment=Enum.TextXAlignment.Left;ae.Parent=ab;local af=Instance.new("TextLabel")af.Position=UDim2.new(0,75,0.5,10)af.AnchorPoint=Vector2.new(0,0.5)af.Size=UDim2.new(0,200,0,14)af.BackgroundTransparency=1;af.Text=z.Subtitle;af.TextColor3=l.TextSecondary;af.Font=Enum.Font.GothamMedium;af.TextSize=11;af.TextXAlignment=Enum.TextXAlignment.Left;af.Parent=ab;local ag=Instance.new("TextButton")ag.Size=UDim2.new(0,26,0,26)ag.Position=UDim2.new(1,-20,0.5,0)ag.AnchorPoint=Vector2.new(1,0.5)ag.BackgroundColor3=l.SecondaryBG;ag.Text=""ag.AutoButtonColor=false;ag.Parent=ab;local ah=Instance.new("UICorner")ah.CornerRadius=UDim.new(0,6)ah.Parent=ag;local ai=Instance.new("UIStroke")ai.Color=l.Stroke;ai.Thickness=1;ai.Parent=ag;local aj=Instance.new("ImageLabel")aj.Size=UDim2.new(0,14,0,14)aj.Position=UDim2.new(0.5,0,0.5,0)aj.AnchorPoint=Vector2.new(0.5,0.5)aj.BackgroundTransparency=1;aj.Image=w.get("x")aj.ImageColor3=l.TextSecondary;aj.Parent=ag;local function ak()e:Create(a2,TweenInfo.new(0.5,Enum.EasingStyle.Exponential,Enum.EasingDirection.In),{Position=UDim2.new(0.5,0,0.5,40),GroupTransparency=1}):Play()task.wait(0.5)m:Destroy()end;ag.MouseButton1Click:Connect(ak)ag.MouseEnter:Connect(function()e:Create(ag,TweenInfo.new(0.2),{BackgroundColor3=l.Error}):Play()e:Create(aj,TweenInfo.new(0.2),{ImageColor3=l.TextPrimary}):Play()e:Create(ai,TweenInfo.new(0.2),{Transparency=1}):Play()end)ag.MouseLeave:Connect(function()e:Create(ag,TweenInfo.new(0.2),{BackgroundColor3=l.SecondaryBG}):Play()e:Create(aj,TweenInfo.new(0.2),{ImageColor3=l.TextSecondary}):Play()e:Create(ai,TweenInfo.new(0.2),{Transparency=0}):Play()end)local al=Instance.new("Frame")al.Size=UDim2.new(1,-40,1,-80)al.Position=UDim2.new(0,20,0,80)al.BackgroundTransparency=1;al.Parent=a2;local am=Instance.new("Frame")am.Size=UDim2.new(1,0,0,40)am.Position=UDim2.new(0,0,0,0)am.BackgroundColor3=l.SecondaryBG;am.BorderSizePixel=0;am.Parent=al;local an=Instance.new("UICorner")an.CornerRadius=UDim.new(0,8)an.Parent=am;local ao=Instance.new("UIStroke")ao.Color=l.Stroke;ao.Thickness=1;ao.Parent=am;local ap=Instance.new("ImageLabel")ap.Size=UDim2.new(0,16,0,16)ap.Position=UDim2.new(0,12,0.5,0)ap.AnchorPoint=Vector2.new(0,0.5)ap.BackgroundTransparency=1;ap.Image=w.get("shield")ap.ImageColor3=l.Warn;ap.Parent=am;local aq=Instance.new("TextLabel")aq.Size=UDim2.new(1,-40,1,0)aq.Position=UDim2.new(0,36,0,0)aq.BackgroundTransparency=1;aq.Text="Waiting for authorization..."aq.TextColor3=l.TextSecondary;aq.Font=Enum.Font.GothamMedium;aq.TextSize=12;aq.TextXAlignment=Enum.TextXAlignment.Left;aq.Parent=am;local ar=Instance.new("TextLabel")ar.Size=UDim2.new(1,0,0,20)ar.Position=UDim2.new(0,2,0,50)ar.BackgroundTransparency=1;ar.Text="LICENSE KEY"ar.TextColor3=l.TextSecondary;ar.Font=Enum.Font.GothamBold;ar.TextSize=10;ar.TextXAlignment=Enum.TextXAlignment.Left;ar.Parent=al;local as=Instance.new("Frame")as.Size=UDim2.new(1,0,0,46)as.Position=UDim2.new(0,0,0,70)as.BackgroundColor3=l.TertiaryBG;as.BorderSizePixel=0;as.Parent=al;local at=Instance.new("UICorner")at.CornerRadius=UDim.new(0,8)at.Parent=as;local au=Instance.new("UIStroke")au.Color=l.Stroke;au.Thickness=1;au.Parent=as;local av=Instance.new("ImageLabel")av.Size=UDim2.new(0,18,0,18)av.Position=UDim2.new(0,12,0.5,0)av.AnchorPoint=Vector2.new(0,0.5)av.BackgroundTransparency=1;av.Image=w.get("key")av.ImageColor3=l.TextSecondary;av.Parent=as;local aw=Instance.new("TextBox")aw.Size=UDim2.new(1,-40,1,0)aw.Position=UDim2.new(0,38,0,0)aw.BackgroundTransparency=1;aw.Text=""aw.PlaceholderText="Paste your key here..."aw.PlaceholderColor3=Color3.fromRGB(100,110,130)aw.TextColor3=l.TextPrimary;aw.Font=Enum.Font.GothamMedium;aw.TextSize=13;aw.TextXAlignment=Enum.TextXAlignment.Left;aw.ClearTextOnFocus=false;aw.Parent=as;aw:GetPropertyChangedSignal("Text"):Connect(function()if#aw.Text>32 then aw.Text=string.sub(aw.Text,1,32)end end)aw.Focused:Connect(function()e:Create(au,TweenInfo.new(0.3,Enum.EasingStyle.Exponential,Enum.EasingDirection.Out),{Color=l.Accent}):Play()e:Create(av,TweenInfo.new(0.3),{ImageColor3=l.Accent}):Play()end)aw.FocusLost:Connect(function()e:Create(au,TweenInfo.new(0.3,Enum.EasingStyle.Exponential,Enum.EasingDirection.Out),{Color=l.Stroke}):Play()e:Create(av,TweenInfo.new(0.3),{ImageColor3=l.TextSecondary}):Play()end)local ax=Instance.new("TextButton")ax.Size=UDim2.new(1,0,0,46)ax.Position=UDim2.new(0,0,0,130)ax.BackgroundColor3=l.Accent;ax.Text=""ax.AutoButtonColor=false;ax.Parent=al;local ay=Instance.new("UICorner")ay.CornerRadius=UDim.new(0,8)ay.Parent=ax;local az=Instance.new("TextLabel")az.Size=UDim2.new(1,0,1,0)az.BackgroundTransparency=1;az.Text="Authenticate"az.TextColor3=l.TextPrimary;az.Font=Enum.Font.GothamBold;az.TextSize=13;az.Parent=ax;local aA=Instance.new("ImageLabel")aA.Size=UDim2.new(0,16,0,16)aA.Position=UDim2.new(1,-24,0.5,0)aA.AnchorPoint=Vector2.new(1,0.5)aA.BackgroundTransparency=1;aA.Image=w.get("chevron-right")aA.ImageColor3=l.TextPrimary;aA.Parent=ax;ax.MouseEnter:Connect(function()e:Create(ax,TweenInfo.new(0.3,Enum.EasingStyle.Exponential,Enum.EasingDirection.Out),{BackgroundColor3=l.AccentGlow}):Play()e:Create(aA,TweenInfo.new(0.3,Enum.EasingStyle.Exponential,Enum.EasingDirection.Out),{Position=UDim2.new(1,-16,0.5,0)}):Play()end)ax.MouseLeave:Connect(function()e:Create(ax,TweenInfo.new(0.3,Enum.EasingStyle.Exponential,Enum.EasingDirection.Out),{BackgroundColor3=l.Accent}):Play()e:Create(aA,TweenInfo.new(0.3,Enum.EasingStyle.Exponential,Enum.EasingDirection.Out),{Position=UDim2.new(1,-24,0.5,0)}):Play()end)local aB=Instance.new("Frame")aB.Size=UDim2.new(1,0,0,1)aB.Position=UDim2.new(0,0,1,-45)aB.BackgroundColor3=l.Stroke;aB.BorderSizePixel=0;aB.Parent=al;local aC=Instance.new("Frame")aC.Size=UDim2.new(1,0,0,30)aC.Position=UDim2.new(0,0,1,-35)aC.BackgroundTransparency=1;aC.Parent=al;local aD=Instance.new("UIListLayout")aD.FillDirection=Enum.FillDirection.Horizontal;aD.HorizontalAlignment=Enum.HorizontalAlignment.Center;aD.SortOrder=Enum.SortOrder.LayoutOrder;aD.Padding=UDim.new(0,15)aD.Parent=aC;local function aE(aF,Q)local aG=Instance.new("TextButton")aG.Size=UDim2.new(0,80,1,0)aG.BackgroundTransparency=1;aG.Text=""local aH=Instance.new("UIListLayout")aH.FillDirection=Enum.FillDirection.Horizontal;aH.HorizontalAlignment=Enum.HorizontalAlignment.Center;aH.VerticalAlignment=Enum.VerticalAlignment.Center;aH.Padding=UDim.new(0,6)aH.Parent=aG;local aI=Instance.new("ImageLabel")aI.Size=UDim2.new(0,14,0,14)aI.BackgroundTransparency=1;aI.Image=w.get(Q)aI.ImageColor3=l.TextSecondary;aI.Parent=aG;local aJ=Instance.new("TextLabel")aJ.Size=UDim2.new(0,0,1,0)aJ.AutomaticSize=Enum.AutomaticSize.X;aJ.BackgroundTransparency=1;aJ.Text=aF;aJ.TextColor3=l.TextSecondary;aJ.Font=Enum.Font.GothamMedium;aJ.TextSize=11;aJ.Parent=aG;aG.MouseEnter:Connect(function()e:Create(aI,TweenInfo.new(0.2),{ImageColor3=l.TextPrimary}):Play()e:Create(aJ,TweenInfo.new(0.2),{TextColor3=l.TextPrimary}):Play()end)aG.MouseLeave:Connect(function()e:Create(aI,TweenInfo.new(0.2),{ImageColor3=l.TextSecondary}):Play()e:Create(aJ,TweenInfo.new(0.2),{TextColor3=l.TextSecondary}):Play()end)return aG end;local aK=aE("Get Key","link")aK.Parent=aC;local aL=aE("Reset HWID","lock-keyhole-open")aL.Parent=aC;local aM=aE("Discord","gamepad-2")aM.Parent=aC;local aN=0;local function aO(L,aP,N,aQ)if os.clock()-aN<2 then return end;aN=os.clock()K(L,aP,N,aQ)end;aK.MouseButton1Click:Connect(function()setclipboard(z.KeyLink)aO("Link Copied","The key link has been copied to your clipboard.","Success",3)end)aL.MouseButton1Click:Connect(function()setclipboard(z.ResetHWIDLink)aO("Link Copied","HWID reset link copied to clipboard.","Warn",3)end)aM.MouseButton1Click:Connect(function()setclipboard(z.DiscordLink)aO("Discord Copied","Join our community! Link copied.","Success",3)end)local aR=nil;local function aS()if aR then aR:Cancel()end;e:Create(ap,TweenInfo.new(0.3),{Rotation=0}):Play()aq.Text="Waiting for authorization..."aq.TextColor3=l.TextSecondary;ap.Image=w.get("shield")ap.ImageColor3=l.Warn;e:Create(ao,TweenInfo.new(0.3),{Color=l.Stroke}):Play()end;local function aT()aq.Text="Authenticating with server..."aq.TextColor3=l.TextPrimary;ap.Image=w.get("loader-2")ap.ImageColor3=l.Accent;e:Create(ao,TweenInfo.new(0.3),{Color=l.Accent}):Play()aR=e:Create(ap,TweenInfo.new(1,Enum.EasingStyle.Linear,Enum.EasingDirection.InOut,-1),{Rotation=360})aR:Play()end;local aU=false;local function aV()if aU then return end;aU=true;local aW=UDim2.new(0,0,0,70)for G=1,4 do e:Create(as,TweenInfo.new(0.05),{Position=aW+UDim2.new(0,G%2==0 and-6 or 6,0,0)}):Play()task.wait(0.05)end;e:Create(as,TweenInfo.new(0.05),{Position=aW}):Play()e:Create(au,TweenInfo.new(0.3),{Color=l.Error}):Play()task.delay(1.5,function()e:Create(au,TweenInfo.new(0.3),{Color=l.Stroke}):Play()aU=false end)end;local aX=false;local function aY(aZ)if aX then return end;aX=true;if not C then K("Unsupported","This game is not currently supported by Pulsar X.","Error",5)return end;if typeof(aZ)~="string"or#aZ<10 then K("Invalid Input","Please enter a valid key format.","Error",4)aV()aX=false;return end;aZ=aZ:gsub('"',""):gsub("^%s+",""):gsub("%s+$","")az.Text="Verifying..."aT()local a_,b0=pcall(function()return A.check_key(aZ)end)if not a_ then if aR then aR:Cancel()end;ap.Rotation=0;K("Connection Error","Failed to reach the authentication servers.","Error",4)aq.Text="Connection Failed"aq.TextColor3=l.Error;ap.Image=w.get("wifi-off")ap.ImageColor3=l.Error;e:Create(ao,TweenInfo.new(0.3),{Color=l.Error}):Play()task.delay(3,aS)az.Text="Authenticate"aV()aX=false;return end;if b0.code=="KEY_VALID"then if aR then aR:Cancel()end;ap.Rotation=0;K("Access Granted","Welcome back. Initiating systems...","Success",5)az.Text="Success!"aq.Text="Key Verified. Loading script..."aq.TextColor3=l.Success;ap.Image=w.get("check")ap.ImageColor3=l.Success;e:Create(ao,TweenInfo.new(0.5),{Color=l.Success}):Play()e:Create(a5,TweenInfo.new(0.5),{BackgroundColor3=l.Success}):Play()if writefile then writefile(z.FileName,aZ)end;task.spawn(function()getgenv().script_key=aZ;if not getgenv().script_key then script_key=aZ end;A.load_script()end)task.wait(1.5)ak()else local b1={["KEY_EXPIRED"]="Your key has expired.",["KEY_HWID_LOCKED"]="Key locked to another HWID.",["KEY_INCORRECT"]="The key provided is incorrect.",["KEY_BANNED"]="This key has been blacklisted.",["KEY_INVALID"]="Invalid key format detected."}local b2=b1[b0.code]or"Unknown Validation Error"if aR then aR:Cancel()end;ap.Rotation=0;az.Text="Authenticate"K("Authentication Failed",b2,"Error",5)aq.Text=b2;aq.TextColor3=l.Error;ap.Image=w.get("alert-circle")ap.ImageColor3=l.Error;e:Create(ao,TweenInfo.new(0.3),{Color=l.Error}):Play()aV()task.delay(3,aS)aX=false end end;ax.MouseButton1Click:Connect(function()local aZ=aw.Text:gsub(" ","")aY(aZ)end)task.spawn(function()local b3=nil;if getgenv().script_key and#getgenv().script_key>0 then b3=getgenv().script_key elseif script_key and#script_key>0 then b3=script_key elseif isfile and isfile(z.FileName)then local b4=readfile(z.FileName)if b4 and#b4>0 then b3=b4 end end;if b3 and#b3>0 then aw.Text=b3;K("Auto-Login","Found saved key, validating...","Warn",3)aY(b3)end end)
+--! Fixed loading
+if not LPH_OBFUSCATED then
+    LPH_JIT = function(...) return (...) end;
+    LPH_ENCSTR = function(...) return (...) end;
+    LPH_NO_VIRTUALIZE = function(...) return (...) end;
+end
+
+if not game:IsLoaded() then game.Loaded:Wait() end
+
+local cloneref = cloneref or function(o) return o end
+local function safe_service(name)
+    return cloneref(game:GetService(name))
+end
+
+local CoreGui = safe_service("CoreGui")
+local TweenService = safe_service("TweenService")
+local HttpService = safe_service("HttpService")
+local Players = safe_service("Players")
+local UserInputService = safe_service("UserInputService")
+local Lighting = safe_service("Lighting")
+local LocalPlayer = Players.LocalPlayer
+
+local function SafeJSONDecode(str)
+    local s, r = pcall(function() return HttpService:JSONDecode(str) end)
+    if s then return r end
+end
+
+local FolderImage = "PulsarAssets"
+if makefolder and not isfolder(FolderImage) then
+    makefolder(FolderImage)
+end
+
+local Colors = {
+    MainBG = Color3.fromRGB(12, 12, 16),
+    SecondaryBG = Color3.fromRGB(18, 18, 24),
+    TertiaryBG = Color3.fromRGB(24, 24, 32),
+    Accent = Color3.fromRGB(220, 20, 60),
+    AccentGlow = Color3.fromRGB(255, 50, 90),
+    TextPrimary = Color3.fromRGB(255, 255, 255),
+    TextSecondary = Color3.fromRGB(140, 150, 170),
+    Stroke = Color3.fromRGB(35, 35, 45),
+    Success = Color3.fromRGB(40, 220, 140),
+    Warn = Color3.fromRGB(255, 170, 40),
+    Error = Color3.fromRGB(255, 70, 90)
+}
+
+pcall(function() 
+    if getgenv().LuarmorGot_System then 
+        getgenv().LuarmorGot_System:Destroy() 
+    end 
+    local oldBlur = Lighting:FindFirstChild("PulsarBlur")
+    if oldBlur then oldBlur:Destroy() end
+end)
+
+local PulsarBlur = Instance.new("BlurEffect")
+PulsarBlur.Name = "PulsarBlur"
+PulsarBlur.Size = 0
+PulsarBlur.Parent = Lighting
+
+TweenService:Create(PulsarBlur, TweenInfo.new(0.6, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Size = 20}):Play()
+
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "PulsarKeySystem"
+ScreenGui.IgnoreGuiInset = true
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+getgenv().LuarmorGot_System = ScreenGui
+
+if gethui then
+    ScreenGui.Parent = gethui()
+else
+    ScreenGui.Parent = CoreGui
+end
+
+local AssetsToLoad = {
+    {Name = "pulsarx", Type = "discord", Id = "BhWcbQbHFF"},
+    {Name = "key", Type = "icon"},
+    {Name = "book-lock", Type = "icon"},
+    {Name = "gamepad-2", Type = "icon"},
+    {Name = "loader-2", Type = "icon"},
+    {Name = "check", Type = "icon"},
+    {Name = "wifi-off", Type = "icon"},
+    {Name = "alert-circle", Type = "icon"},
+    {Name = "lock-keyhole-open", Type = "icon"},
+    {Name = "x", Type = "icon"},
+    {Name = "book-key", Type = "icon"},
+    {Name = "external-link", Type = "icon"},
+    {Name = "shield", Type = "icon"},
+    {Name = "user", Type = "icon"},
+    {Name = "copy", Type = "icon"},
+    {Name = "clock", Type = "icon"}
+}
+
+local function ProcessAssets()
+    for _, asset in ipairs(AssetsToLoad) do
+        local ext = asset.Type == "discord" and ".jpg" or ".png"
+        local path = FolderImage .. "/" .. asset.Name .. ext
+        
+        if not isfile(path) then
+            local url
+            if asset.Type == "icon" then
+                url = "https://raw.githubusercontent.com/latte-soft/lucide-roblox/master/icons/compiled/256px/" .. asset.Name .. ".png"
+            elseif asset.Type == "discord" then
+                local s, r = pcall(function() 
+                    return game:HttpGet("https://discord.com/api/v10/invites/" .. asset.Id .. "?with_counts=false&with_expiration=false") 
+                end)
+                if s and r then
+                    local decoded = SafeJSONDecode(r)
+                    if decoded and decoded.guild and decoded.guild.icon then
+                        url = ("https://cdn.discordapp.com/icons/%s/%s.png?size=256"):format(decoded.guild.id, decoded.guild.icon)
+                    end
+                end
+            end
+            
+            if url then
+                local s, data = pcall(function() return game:HttpGet(url) end)
+                if s and data and #data > 100 then 
+                    writefile(path, data) 
+                end
+            end
+        end
+    end
+end
+
+ProcessAssets()
+
+local asset_mgr = {
+    get = function(x)
+        local ext = x == "pulsarx" and ".jpg" or ".png"
+        local path = FolderImage .. "/" .. x .. ext
+        if isfile(path) then
+            return getcustomasset(path)
+        end
+        return "rbxassetid://0"
+    end
+}
+
+local gameIdToURL = {
+    ["6664476231"] = "5ccd093b99591486f2001c115400f454",
+    ["4069560710"] = "01e31cb43a472d28871f37ee45d9f21a",
+    ["7709344486"] = "51d3af0c95c2202166bf716b5a120203",
+    ["7332711118"] = "be874f306da8948c7636f090c7222b46",
+    ["4161970303"] = "f29ded5e442893604294a1a0cfb98a79",
+    ["8443571594"] = "6f8aad3aa2d60232e978e1db2f18cbb8",
+    ["6216468795"] = "f9ade440aa24e4ade61df9066f9b339a",
+    ["8321616508"] = "68b54db197e247a94e59e2cab8617fef",
+    ["8832884753"] = "660505cd7637b83d8d3d88ecc3882cd9",
+    ["8779464785"] = "0c16aabca6ba4f89d5a4fb232eb39f65",
+    ["8916375040"] = "6c5fef915a2939142f857fd8098662d4",
+    ["9186719164"] = "13d1621b60dce0465d5baea7ffc9c9f7",
+    ["9671940985"] = "27a561f5e2606ee11865ef31ead65df1",
+    ["9679625425"] = "1f9877cc257889d71f46c554915d07eb",
+    ["9510293839"] = "928d148d9d15c8151cc73dded45f6975",
+    ["9709606565"] = "f7e40f1ac25c05097c992e5b1f14def9",
+    ["9133163823"] = "31d50c8ffbeaa38a577f38e279cc81be",
+    ["9751761702"] = "2edbe1c84f93b1f80ee4889915bfdcb1",
+    ["7178032757"] = "577218de3c588c3ef155af46262499e2",
+    ["9917246399"] = "a62365c7600cc42338fc374e0924a98c",
+    ["10004244222"] = "ac39eac78e792f40d363716be26d5047",
+    ["9792947201"] = "b9a6c6d6349c51c5bf0be33b37d80974",
+    ["6409513651"] = "8daa812353e296b08bcc6bb18c2aed15",
+    ["9654716970"] = "0cfec26e9dffcd02142df0dfa1205e9f",
+    ["10143502462"] = "49d9e8f6d939bb2e3c30b4c4029f2b0b",
+    ["9860860377"] = "e89b2a9d39319e9db2caba7c3df6d279",
+    ["6391458589"] = "626411dc79e5f5381fd7ec25c8e10553",
+    ["10093833731"] = "cb12c13a7e923106310362b89f94beb8",
+    ["10067868611"] = "67abdc09ec99469ba156d58aaa2de054",
+}
+
+local Config = {
+    HeaderTitle = LPH_ENCSTR("PULSAR X"),
+    Subtitle = LPH_ENCSTR("Authentication System"),
+    KeyLink = LPH_ENCSTR("https://pulsarx.net/"),
+    DiscordLink = LPH_ENCSTR("https://discord.gg/BhWcbQbHFF"),
+    ResetHWIDLink = LPH_ENCSTR("https://pulsarx.net/resethwid/"),
+    FileName = LPH_ENCSTR("PulsarKey_Save.txt")
+}
+
+local api = LPH_NO_VIRTUALIZE(function() return loadstring(game:HttpGet("https://sdkapi-public.luarmor.net/library.lua"))() end)()
+local currentScriptId = gameIdToURL[tostring(game.GameId)]
+local isSupported = false
+
+if api and currentScriptId then
+    api.script_id = currentScriptId
+    isSupported = true
+end
+
+local NotificationContainer = Instance.new("Frame")
+NotificationContainer.Size = UDim2.new(0, 300, 1, 0)
+NotificationContainer.AnchorPoint = Vector2.new(1, 1)
+NotificationContainer.Position = UDim2.new(1, -20, 1, -20)
+NotificationContainer.BackgroundTransparency = 1
+NotificationContainer.Parent = ScreenGui
+
+local ActiveNotifications = {}
+
+local UpdateNotifications = LPH_JIT(function()
+    for i, note in ipairs(ActiveNotifications) do
+        local targetY = 0
+        for j = 1, i - 1 do
+            if ActiveNotifications[j] and ActiveNotifications[j].Instance then
+                targetY = targetY + ActiveNotifications[j].Instance.Size.Y.Offset + 12
+            end
+        end
+        TweenService:Create(note.Instance, TweenInfo.new(0.5, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Position = UDim2.new(0, 0, 1, -targetY)}):Play()
+    end
+end)
+
+local function Notify(title, message, type, duration)
+    local accentColor = Colors.Success
+    local iconId = "check"
+    
+    if type == "Warn" then 
+        accentColor = Colors.Warn
+        iconId = "alert-circle"
+    elseif type == "Error" then 
+        accentColor = Colors.Error
+        iconId = "x"
+    elseif type == "Info" then
+        accentColor = Colors.Accent
+        iconId = "shield"
+    end
+
+    local Toast = Instance.new("Frame")
+    Toast.Size = UDim2.new(1, 0, 0, 60)
+    Toast.AnchorPoint = Vector2.new(0, 1)
+    Toast.Position = UDim2.new(1, 350, 1, 0)
+    Toast.BackgroundColor3 = Colors.MainBG
+    Toast.BorderSizePixel = 0
+    Toast.Parent = NotificationContainer
+
+    local UICorner = Instance.new("UICorner")
+    UICorner.CornerRadius = UDim.new(0, 8)
+    UICorner.Parent = Toast
+
+    local UIStroke = Instance.new("UIStroke")
+    UIStroke.Color = Colors.Stroke
+    UIStroke.Thickness = 1
+    UIStroke.Parent = Toast
+
+    local LeftBar = Instance.new("Frame")
+    LeftBar.Size = UDim2.new(0, 3, 1, -16)
+    LeftBar.Position = UDim2.new(0, 8, 0.5, 0)
+    LeftBar.AnchorPoint = Vector2.new(0, 0.5)
+    LeftBar.BackgroundColor3 = accentColor
+    LeftBar.BorderSizePixel = 0
+    LeftBar.Parent = Toast
+
+    local LeftBarCorner = Instance.new("UICorner")
+    LeftBarCorner.CornerRadius = UDim.new(1, 0)
+    LeftBarCorner.Parent = LeftBar
+
+    local Icon = Instance.new("ImageLabel")
+    Icon.Size = UDim2.new(0, 18, 0, 18)
+    Icon.Position = UDim2.new(0, 20, 0.5, 0)
+    Icon.AnchorPoint = Vector2.new(0, 0.5)
+    Icon.BackgroundTransparency = 1
+    Icon.Image = asset_mgr.get(iconId)
+    Icon.ImageColor3 = accentColor
+    Icon.Parent = Toast
+
+    local TitleLabel = Instance.new("TextLabel")
+    TitleLabel.Size = UDim2.new(1, -60, 0, 18)
+    TitleLabel.Position = UDim2.new(0, 48, 0, 10)
+    TitleLabel.BackgroundTransparency = 1
+    TitleLabel.Text = title
+    TitleLabel.TextColor3 = Colors.TextPrimary
+    TitleLabel.Font = Enum.Font.GothamBold
+    TitleLabel.TextSize = 13
+    TitleLabel.TextXAlignment = Enum.TextXAlignment.Left
+    TitleLabel.Parent = Toast
+
+    local MsgLabel = Instance.new("TextLabel")
+    MsgLabel.Size = UDim2.new(1, -60, 0, 16)
+    MsgLabel.Position = UDim2.new(0, 48, 0, 30)
+    MsgLabel.BackgroundTransparency = 1
+    MsgLabel.Text = message
+    MsgLabel.TextColor3 = Colors.TextSecondary
+    MsgLabel.Font = Enum.Font.Gotham
+    MsgLabel.TextSize = 11
+    MsgLabel.TextXAlignment = Enum.TextXAlignment.Left
+    MsgLabel.TextWrapped = true
+    MsgLabel.Parent = Toast
+
+    local notiData = {Instance = Toast}
+    table.insert(ActiveNotifications, 1, notiData)
+    
+    if #ActiveNotifications > 4 then
+        local old = table.remove(ActiveNotifications, #ActiveNotifications)
+        if old and old.Instance then
+            TweenService:Create(old.Instance, TweenInfo.new(0.4, Enum.EasingStyle.Exponential, Enum.EasingDirection.In), {Position = UDim2.new(1, 350, 1, old.Instance.Position.Y.Offset)}):Play()
+            task.delay(0.4, function() old.Instance:Destroy() end)
+        end
+    end
+
+    UpdateNotifications()
+
+    task.spawn(function()
+        task.wait(duration or 4)
+        if Toast and Toast.Parent then
+            local foundIdx = nil
+            for i, v in ipairs(ActiveNotifications) do
+                if v.Instance == Toast then
+                    foundIdx = i
+                    break
+                end
+            end
+            
+            if foundIdx then
+                table.remove(ActiveNotifications, foundIdx)
+                TweenService:Create(Toast, TweenInfo.new(0.4, Enum.EasingStyle.Exponential, Enum.EasingDirection.In), {Position = UDim2.new(1, 350, 1, Toast.Position.Y.Offset)}):Play()
+                task.delay(0.4, function() Toast:Destroy() end)
+                UpdateNotifications()
+            end
+        end
+    end)
+end
+
+local MainContainer = Instance.new("Frame")
+MainContainer.Size = UDim2.new(0, 360, 0, 380)
+MainContainer.Position = UDim2.new(0.5, 0, 0.5, 0)
+MainContainer.AnchorPoint = Vector2.new(0.5, 0.5)
+MainContainer.BackgroundTransparency = 1
+MainContainer.Parent = ScreenGui
+
+local MainCard = Instance.new("Frame")
+MainCard.Size = UDim2.new(1, 0, 1, 0)
+MainCard.Position = UDim2.new(0.5, 0, 0.5, 0)
+MainCard.AnchorPoint = Vector2.new(0.5, 0.5)
+MainCard.BackgroundColor3 = Colors.MainBG
+MainCard.BorderSizePixel = 0
+MainCard.BackgroundTransparency = 1
+MainCard.Parent = MainContainer
+
+local CardCorner = Instance.new("UICorner")
+CardCorner.CornerRadius = UDim.new(0, 12)
+CardCorner.Parent = MainCard
+
+local CardStroke = Instance.new("UIStroke")
+CardStroke.Color = Colors.Stroke
+CardStroke.Thickness = 1
+CardStroke.Transparency = 1
+CardStroke.Parent = MainCard
+
+local UserPanel = Instance.new("Frame")
+UserPanel.Size = UDim2.new(0, 0, 1, 0)
+UserPanel.Position = UDim2.new(1, 10, 0, 0)
+UserPanel.BackgroundColor3 = Colors.MainBG
+UserPanel.BorderSizePixel = 0
+UserPanel.ClipsDescendants = true
+UserPanel.Parent = MainCard
+
+local UserPanelCorner = Instance.new("UICorner")
+UserPanelCorner.CornerRadius = UDim.new(0, 12)
+UserPanelCorner.Parent = UserPanel
+
+local UserPanelStroke = Instance.new("UIStroke")
+UserPanelStroke.Color = Colors.Stroke
+UserPanelStroke.Thickness = 1
+UserPanelStroke.Transparency = 1
+UserPanelStroke.Parent = UserPanel
+
+local UserPanelLayout = Instance.new("UIListLayout")
+UserPanelLayout.SortOrder = Enum.SortOrder.LayoutOrder
+UserPanelLayout.Padding = UDim.new(0, 0)
+UserPanelLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+UserPanelLayout.Parent = UserPanel
+
+local UserPanelPadding = Instance.new("UIPadding")
+UserPanelPadding.PaddingTop = UDim.new(0, 20)
+UserPanelPadding.PaddingBottom = UDim.new(0, 20)
+UserPanelPadding.PaddingLeft = UDim.new(0, 15)
+UserPanelPadding.PaddingRight = UDim.new(0, 15)
+UserPanelPadding.Parent = UserPanel
+
+local AvatarImg = Instance.new("ImageLabel")
+AvatarImg.Size = UDim2.new(0, 56, 0, 56)
+AvatarImg.BackgroundColor3 = Colors.TertiaryBG
+AvatarImg.LayoutOrder = 1
+AvatarImg.Parent = UserPanel
+
+local AvatarCorner = Instance.new("UICorner")
+AvatarCorner.CornerRadius = UDim.new(0, 8)
+AvatarCorner.Parent = AvatarImg
+
+local AvatarStroke = Instance.new("UIStroke")
+AvatarStroke.Color = Colors.Accent
+AvatarStroke.Thickness = 2
+AvatarStroke.Parent = AvatarImg
+
+pcall(function()
+    AvatarImg.Image = Players:GetUserThumbnailAsync(LocalPlayer.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size150x150)
+end)
+
+local DisplayNameText = Instance.new("TextLabel")
+DisplayNameText.Size = UDim2.new(1, 0, 0, 30)
+DisplayNameText.BackgroundTransparency = 1
+DisplayNameText.Text = "Welcome, " .. LocalPlayer.DisplayName
+DisplayNameText.TextColor3 = Colors.TextPrimary
+DisplayNameText.Font = Enum.Font.GothamBold
+DisplayNameText.TextSize = 13
+DisplayNameText.LayoutOrder = 2
+DisplayNameText.Parent = UserPanel
+
+local function CreateDivider(order)
+    local divWrapper = Instance.new("Frame")
+    divWrapper.Size = UDim2.new(1, 30, 0, 15)
+    divWrapper.BackgroundTransparency = 1
+    divWrapper.LayoutOrder = order
+    
+    local divLine = Instance.new("Frame")
+    divLine.Size = UDim2.new(1, 0, 0, 1)
+    divLine.Position = UDim2.new(0.5, 0, 0.5, 0)
+    divLine.AnchorPoint = Vector2.new(0.5, 0.5)
+    divLine.BackgroundColor3 = Colors.Stroke
+    divLine.BorderSizePixel = 0
+    divLine.Parent = divWrapper
+    
+    return divWrapper
+end
+
+local function GetExecutor()
+    local s, n = pcall(identifyexecutor)
+    if s and n then return tostring(n) end
+    return "Unknown"
+end
+
+local function GetDevice()
+    if UserInputService.GamepadEnabled then return "Console" end
+    if UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled then return "Mobile" end
+    return "PC"
+end
+
+local function CreateInfoField(title, value, order)
+    local container = Instance.new("Frame")
+    container.Size = UDim2.new(1, 0, 0, 36)
+    container.BackgroundTransparency = 1
+    container.LayoutOrder = order
+
+    local titleLabel = Instance.new("TextLabel")
+    titleLabel.Size = UDim2.new(1, 0, 0, 14)
+    titleLabel.BackgroundTransparency = 1
+    titleLabel.Text = title
+    titleLabel.TextColor3 = Colors.TextSecondary
+    titleLabel.Font = Enum.Font.GothamMedium
+    titleLabel.TextSize = 11
+    titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+    titleLabel.Parent = container
+
+    local valueLabel = Instance.new("TextLabel")
+    valueLabel.Size = UDim2.new(1, 0, 0, 18)
+    valueLabel.Position = UDim2.new(0, 0, 0, 16)
+    valueLabel.BackgroundTransparency = 1
+    valueLabel.Text = value
+    valueLabel.TextColor3 = Colors.Accent
+    valueLabel.Font = Enum.Font.GothamBold
+    valueLabel.TextSize = 13
+    valueLabel.TextXAlignment = Enum.TextXAlignment.Left
+    valueLabel.Parent = container
+
+    return container
+end
+
+CreateDivider(3).Parent = UserPanel
+CreateInfoField("Executor", GetExecutor(), 4).Parent = UserPanel
+CreateInfoField("Device", GetDevice(), 5).Parent = UserPanel
+CreateDivider(6).Parent = UserPanel
+
+local HwidContainer = Instance.new("Frame")
+HwidContainer.Size = UDim2.new(1, 0, 0, 36)
+HwidContainer.BackgroundTransparency = 1
+HwidContainer.LayoutOrder = 7
+HwidContainer.Parent = UserPanel
+
+local HwidTitle = Instance.new("TextLabel")
+HwidTitle.Size = UDim2.new(1, 0, 0, 14)
+HwidTitle.BackgroundTransparency = 1
+HwidTitle.Text = "HWID"
+HwidTitle.TextColor3 = Colors.TextSecondary
+HwidTitle.Font = Enum.Font.GothamMedium
+HwidTitle.TextSize = 11
+HwidTitle.TextXAlignment = Enum.TextXAlignment.Left
+HwidTitle.Parent = HwidContainer
+
+local fullHWID = "Unknown"
+pcall(function() fullHWID = gethwid() end)
+
+local HwidValue = Instance.new("TextLabel")
+HwidValue.Size = UDim2.new(1, -24, 0, 18)
+HwidValue.Position = UDim2.new(0, 0, 0, 16)
+HwidValue.BackgroundTransparency = 1
+HwidValue.Text = string.rep("•", 18)
+HwidValue.TextColor3 = Colors.TextSecondary
+HwidValue.Font = Enum.Font.GothamBold
+HwidValue.TextSize = 16
+HwidValue.TextXAlignment = Enum.TextXAlignment.Left
+HwidValue.Parent = HwidContainer
+
+local CopyHwidBtn = Instance.new("ImageButton")
+CopyHwidBtn.Size = UDim2.new(0, 18, 0, 18)
+CopyHwidBtn.Position = UDim2.new(1, 0, 0, 16)
+CopyHwidBtn.AnchorPoint = Vector2.new(1, 0)
+CopyHwidBtn.BackgroundTransparency = 1
+CopyHwidBtn.Image = asset_mgr.get("copy")
+CopyHwidBtn.ImageColor3 = Colors.TextSecondary
+CopyHwidBtn.Parent = HwidContainer
+
+CopyHwidBtn.MouseEnter:Connect(function()
+    TweenService:Create(CopyHwidBtn, TweenInfo.new(0.2), {ImageColor3 = Colors.Accent}):Play()
+end)
+CopyHwidBtn.MouseLeave:Connect(function()
+    TweenService:Create(CopyHwidBtn, TweenInfo.new(0.2), {ImageColor3 = Colors.TextSecondary}):Play()
+end)
+CopyHwidBtn.MouseButton1Click:Connect(function()
+    setclipboard(fullHWID)
+    TweenService:Create(CopyHwidBtn, TweenInfo.new(0.1), {ImageColor3 = Colors.Success}):Play()
+    task.delay(0.3, function()
+        TweenService:Create(CopyHwidBtn, TweenInfo.new(0.2), {ImageColor3 = Colors.TextSecondary}):Play()
+    end)
+    Notify("Copied", "HWID has been copied to your clipboard.", "Info", 3)
+end)
+
+CreateDivider(8).Parent = UserPanel
+
+local ClockContainer = Instance.new("Frame")
+ClockContainer.Size = UDim2.new(1, 0, 0, 40)
+ClockContainer.BackgroundTransparency = 1
+ClockContainer.LayoutOrder = 9
+ClockContainer.Parent = UserPanel
+
+local ClockRow = Instance.new("Frame")
+ClockRow.Size = UDim2.new(1, 0, 0, 20)
+ClockRow.BackgroundTransparency = 1
+ClockRow.Parent = ClockContainer
+
+local ClockLayout = Instance.new("UIListLayout")
+ClockLayout.FillDirection = Enum.FillDirection.Horizontal
+ClockLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+ClockLayout.VerticalAlignment = Enum.VerticalAlignment.Center
+ClockLayout.Padding = UDim.new(0, 6)
+ClockLayout.Parent = ClockRow
+
+local ClockIcon = Instance.new("ImageLabel")
+ClockIcon.Size = UDim2.new(0, 18, 0, 18)
+ClockIcon.BackgroundTransparency = 1
+ClockIcon.Image = asset_mgr.get("clock")
+ClockIcon.ImageColor3 = Colors.Accent
+ClockIcon.Parent = ClockRow
+
+local ClockTime = Instance.new("TextLabel")
+ClockTime.Size = UDim2.new(0, 0, 1, 0)
+ClockTime.AutomaticSize = Enum.AutomaticSize.X
+ClockTime.BackgroundTransparency = 1
+ClockTime.Text = "00:00:00 AM"
+ClockTime.TextColor3 = Colors.Accent
+ClockTime.Font = Enum.Font.GothamBold
+ClockTime.TextSize = 18
+ClockTime.Parent = ClockRow
+
+local ClockDate = Instance.new("TextLabel")
+ClockDate.Size = UDim2.new(1, 0, 0, 14)
+ClockDate.Position = UDim2.new(0, 0, 0, 24)
+ClockDate.BackgroundTransparency = 1
+ClockDate.Text = "Loading..."
+ClockDate.TextColor3 = Colors.TextSecondary
+ClockDate.Font = Enum.Font.GothamMedium
+ClockDate.TextSize = 12
+ClockDate.TextXAlignment = Enum.TextXAlignment.Center
+ClockDate.Parent = ClockContainer
+
+local isClockRunning = true
+task.spawn(function()
+    while isClockRunning do
+        if not ClockTime.Parent then isClockRunning = false break end
+        local timeT = os.date("*t")
+        local ampm = timeT.hour >= 12 and "PM" or "AM"
+        local h = timeT.hour % 12
+        if h == 0 then h = 12 end
+        ClockTime.Text = string.format("%d:%02d:%02d %s", h, timeT.min, timeT.sec, ampm)
+        ClockDate.Text = os.date("%b %d, %Y")
+        task.wait(1)
+    end
+end)
+
+local TopBar = Instance.new("Frame")
+TopBar.Size = UDim2.new(1, 0, 0, 3)
+TopBar.Position = UDim2.new(0, 0, 0, 0)
+TopBar.BackgroundColor3 = Colors.Accent
+TopBar.BorderSizePixel = 0
+TopBar.ZIndex = 2
+TopBar.Parent = MainCard
+
+local UIScale = Instance.new("UIScale")
+UIScale.Scale = 0.8
+UIScale.Parent = MainContainer
+
+local function UpdateScale()
+    local viewport = workspace.CurrentCamera.ViewportSize
+    local width = viewport.X
+    local height = viewport.Y
+    if width < 500 or height < 500 then
+        UIScale.Scale = math.clamp(math.min(width / 380, height / 380), 0.6, 0.9)
+    else
+        UIScale.Scale = 1
+    end
+end
+workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(UpdateScale)
+
+TweenService:Create(UIScale, TweenInfo.new(0.6, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Scale = 1}):Play()
+TweenService:Create(MainCard, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundTransparency = 0}):Play()
+TweenService:Create(CardStroke, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Transparency = 0}):Play()
+
+UpdateScale()
+
+local Header = Instance.new("Frame")
+Header.Size = UDim2.new(1, 0, 0, 80)
+Header.Position = UDim2.new(0, 0, 0, 0)
+Header.BackgroundTransparency = 1
+Header.Parent = MainCard
+
+local ServerIcon = Instance.new("ImageLabel")
+ServerIcon.Size = UDim2.new(0, 42, 0, 42)
+ServerIcon.Position = UDim2.new(0, 20, 0.5, 0)
+ServerIcon.AnchorPoint = Vector2.new(0, 0.5)
+ServerIcon.BackgroundTransparency = 1
+ServerIcon.Image = asset_mgr.get("pulsarx")
+ServerIcon.Parent = Header
+
+local ServerIconCorner = Instance.new("UICorner")
+ServerIconCorner.CornerRadius = UDim.new(0, 10)
+ServerIconCorner.Parent = ServerIcon
+
+local HeaderTitleText = Instance.new("TextLabel")
+HeaderTitleText.Position = UDim2.new(0, 75, 0.5, -10)
+HeaderTitleText.AnchorPoint = Vector2.new(0, 0.5)
+HeaderTitleText.Size = UDim2.new(0, 200, 0, 20)
+HeaderTitleText.BackgroundTransparency = 1
+HeaderTitleText.Text = Config.HeaderTitle
+HeaderTitleText.TextColor3 = Colors.TextPrimary
+HeaderTitleText.Font = Enum.Font.GothamBlack
+HeaderTitleText.TextSize = 18
+HeaderTitleText.TextXAlignment = Enum.TextXAlignment.Left
+HeaderTitleText.Parent = Header
+
+local SubText = Instance.new("TextLabel")
+SubText.Position = UDim2.new(0, 75, 0.5, 10)
+SubText.AnchorPoint = Vector2.new(0, 0.5)
+SubText.Size = UDim2.new(0, 200, 0, 14)
+SubText.BackgroundTransparency = 1
+SubText.Text = Config.Subtitle
+SubText.TextColor3 = Colors.TextSecondary
+SubText.Font = Enum.Font.GothamMedium
+SubText.TextSize = 11
+SubText.TextXAlignment = Enum.TextXAlignment.Left
+SubText.Parent = Header
+
+local CustomCloseBtn = Instance.new("TextButton")
+CustomCloseBtn.Size = UDim2.new(0, 26, 0, 26)
+CustomCloseBtn.Position = UDim2.new(1, -20, 0.5, 0)
+CustomCloseBtn.AnchorPoint = Vector2.new(1, 0.5)
+CustomCloseBtn.BackgroundColor3 = Colors.SecondaryBG
+CustomCloseBtn.Text = ""
+CustomCloseBtn.AutoButtonColor = false
+CustomCloseBtn.Parent = Header
+
+local CloseCorner = Instance.new("UICorner")
+CloseCorner.CornerRadius = UDim.new(0, 6)
+CloseCorner.Parent = CustomCloseBtn
+
+local CloseStroke = Instance.new("UIStroke")
+CloseStroke.Color = Colors.Stroke
+CloseStroke.Thickness = 1
+CloseStroke.Parent = CustomCloseBtn
+
+local CloseIcon = Instance.new("ImageLabel")
+CloseIcon.Size = UDim2.new(0, 14, 0, 14)
+CloseIcon.Position = UDim2.new(0.5, 0, 0.5, 0)
+CloseIcon.AnchorPoint = Vector2.new(0.5, 0.5)
+CloseIcon.BackgroundTransparency = 1
+CloseIcon.Image = asset_mgr.get("x")
+CloseIcon.ImageColor3 = Colors.TextSecondary
+CloseIcon.Parent = CustomCloseBtn
+
+local isUserPanelOpen = false
+
+local function CleanDestroy()
+    if isUserPanelOpen then
+        TweenService:Create(UserPanel, TweenInfo.new(0.3, Enum.EasingStyle.Exponential, Enum.EasingDirection.In), {Size = UDim2.new(0, 0, 1, 0)}):Play()
+        TweenService:Create(UserPanelStroke, TweenInfo.new(0.3), {Transparency = 1}):Play()
+    end
+    TweenService:Create(UIScale, TweenInfo.new(0.4, Enum.EasingStyle.Back, Enum.EasingDirection.In), {Scale = 0.8}):Play()
+    TweenService:Create(MainCard, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {BackgroundTransparency = 1}):Play()
+    TweenService:Create(CardStroke, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Transparency = 1}):Play()
+    TweenService:Create(PulsarBlur, TweenInfo.new(0.5, Enum.EasingStyle.Exponential, Enum.EasingDirection.In), {Size = 0}):Play()
+    
+    task.wait(0.5)
+    if PulsarBlur then PulsarBlur:Destroy() end
+    ScreenGui:Destroy()
+end
+
+CustomCloseBtn.MouseButton1Click:Connect(CleanDestroy)
+
+CustomCloseBtn.MouseEnter:Connect(function()
+    TweenService:Create(CustomCloseBtn, TweenInfo.new(0.2), {BackgroundColor3 = Colors.Error}):Play()
+    TweenService:Create(CloseIcon, TweenInfo.new(0.2), {ImageColor3 = Colors.TextPrimary}):Play()
+    TweenService:Create(CloseStroke, TweenInfo.new(0.2), {Transparency = 1}):Play()
+end)
+CustomCloseBtn.MouseLeave:Connect(function()
+    TweenService:Create(CustomCloseBtn, TweenInfo.new(0.2), {BackgroundColor3 = Colors.SecondaryBG}):Play()
+    TweenService:Create(CloseIcon, TweenInfo.new(0.2), {ImageColor3 = Colors.TextSecondary}):Play()
+    TweenService:Create(CloseStroke, TweenInfo.new(0.2), {Transparency = 0}):Play()
+end)
+
+local BodyFrame = Instance.new("Frame")
+BodyFrame.Size = UDim2.new(1, -40, 1, -80)
+BodyFrame.Position = UDim2.new(0, 20, 0, 80)
+BodyFrame.BackgroundTransparency = 1
+BodyFrame.Parent = MainCard
+
+local StatusFrame = Instance.new("Frame")
+StatusFrame.Size = UDim2.new(1, 0, 0, 40)
+StatusFrame.Position = UDim2.new(0, 0, 0, 0)
+StatusFrame.BackgroundColor3 = Colors.SecondaryBG
+StatusFrame.BorderSizePixel = 0
+StatusFrame.Parent = BodyFrame
+
+local StatusCorner = Instance.new("UICorner")
+StatusCorner.CornerRadius = UDim.new(0, 8)
+StatusCorner.Parent = StatusFrame
+
+local StatusStroke = Instance.new("UIStroke")
+StatusStroke.Color = Colors.Stroke
+StatusStroke.Thickness = 1
+StatusStroke.Parent = StatusFrame
+
+local StatusIcon = Instance.new("ImageLabel")
+StatusIcon.Size = UDim2.new(0, 16, 0, 16)
+StatusIcon.Position = UDim2.new(0, 12, 0.5, 0)
+StatusIcon.AnchorPoint = Vector2.new(0, 0.5)
+StatusIcon.BackgroundTransparency = 1
+StatusIcon.Image = asset_mgr.get("shield")
+StatusIcon.ImageColor3 = Colors.Warn
+StatusIcon.Parent = StatusFrame
+
+local StatusText = Instance.new("TextLabel")
+StatusText.Size = UDim2.new(1, -40, 1, 0)
+StatusText.Position = UDim2.new(0, 36, 0, 0)
+StatusText.BackgroundTransparency = 1
+StatusText.Text = "Waiting for authorization..."
+StatusText.TextColor3 = Colors.TextSecondary
+StatusText.Font = Enum.Font.GothamMedium
+StatusText.TextSize = 12
+StatusText.TextXAlignment = Enum.TextXAlignment.Left
+StatusText.Parent = StatusFrame
+
+local InputLabel = Instance.new("TextLabel")
+InputLabel.Size = UDim2.new(1, 0, 0, 20)
+InputLabel.Position = UDim2.new(0, 2, 0, 50)
+InputLabel.BackgroundTransparency = 1
+InputLabel.Text = "LICENSE KEY"
+InputLabel.TextColor3 = Colors.TextSecondary
+InputLabel.Font = Enum.Font.GothamBold
+InputLabel.TextSize = 10
+InputLabel.TextXAlignment = Enum.TextXAlignment.Left
+InputLabel.Parent = BodyFrame
+
+local InputFrame = Instance.new("Frame")
+InputFrame.Size = UDim2.new(1, 0, 0, 46)
+InputFrame.Position = UDim2.new(0, 0, 0, 70)
+InputFrame.BackgroundColor3 = Colors.TertiaryBG
+InputFrame.BorderSizePixel = 0
+InputFrame.Parent = BodyFrame
+
+local InputCorner = Instance.new("UICorner")
+InputCorner.CornerRadius = UDim.new(0, 8)
+InputCorner.Parent = InputFrame
+
+local InputStroke = Instance.new("UIStroke")
+InputStroke.Color = Colors.Stroke
+InputStroke.Thickness = 1
+InputStroke.Parent = InputFrame
+
+local KeyIcon = Instance.new("ImageLabel")
+KeyIcon.Size = UDim2.new(0, 18, 0, 18)
+KeyIcon.Position = UDim2.new(0, 12, 0.5, 0)
+KeyIcon.AnchorPoint = Vector2.new(0, 0.5)
+KeyIcon.BackgroundTransparency = 1
+KeyIcon.Image = asset_mgr.get("key")
+KeyIcon.ImageColor3 = Colors.TextSecondary
+KeyIcon.Parent = InputFrame
+
+local KeyInput = Instance.new("TextBox")
+KeyInput.Size = UDim2.new(1, -40, 1, 0)
+KeyInput.Position = UDim2.new(0, 38, 0, 0)
+KeyInput.BackgroundTransparency = 1
+KeyInput.Text = ""
+KeyInput.PlaceholderText = "Paste your key here..."
+KeyInput.PlaceholderColor3 = Color3.fromRGB(100, 110, 130)
+KeyInput.TextColor3 = Colors.TextPrimary
+KeyInput.Font = Enum.Font.GothamMedium
+KeyInput.TextSize = 13
+KeyInput.TextXAlignment = Enum.TextXAlignment.Left
+KeyInput.ClearTextOnFocus = false
+KeyInput.Parent = InputFrame
+
+KeyInput:GetPropertyChangedSignal("Text"):Connect(function()
+    if #KeyInput.Text > 32 then
+        KeyInput.Text = string.sub(KeyInput.Text, 1, 32)
+    end
+end)
+
+KeyInput.Focused:Connect(function()
+    TweenService:Create(InputStroke, TweenInfo.new(0.3, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Color = Colors.Accent}):Play()
+    TweenService:Create(KeyIcon, TweenInfo.new(0.3), {ImageColor3 = Colors.Accent}):Play()
+end)
+
+KeyInput.FocusLost:Connect(function()
+    TweenService:Create(InputStroke, TweenInfo.new(0.3, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Color = Colors.Stroke}):Play()
+    TweenService:Create(KeyIcon, TweenInfo.new(0.3), {ImageColor3 = Colors.TextSecondary}):Play()
+end)
+
+local AcquireBtn = Instance.new("TextButton")
+AcquireBtn.Size = UDim2.new(1, 0, 0, 42)
+AcquireBtn.Position = UDim2.new(0, 0, 0, 130)
+AcquireBtn.BackgroundColor3 = Colors.SecondaryBG
+AcquireBtn.Text = ""
+AcquireBtn.AutoButtonColor = false
+AcquireBtn.Parent = BodyFrame
+
+local AcquireCorner = Instance.new("UICorner")
+AcquireCorner.CornerRadius = UDim.new(0, 8)
+AcquireCorner.Parent = AcquireBtn
+
+local AcquireStroke = Instance.new("UIStroke")
+AcquireStroke.Color = Colors.Stroke
+AcquireStroke.Thickness = 1
+AcquireStroke.Parent = AcquireBtn
+
+local AcquireContent = Instance.new("Frame")
+AcquireContent.Size = UDim2.new(1, 0, 1, 0)
+AcquireContent.BackgroundTransparency = 1
+AcquireContent.Parent = AcquireBtn
+
+local AcquireLayout = Instance.new("UIListLayout")
+AcquireLayout.FillDirection = Enum.FillDirection.Horizontal
+AcquireLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+AcquireLayout.VerticalAlignment = Enum.VerticalAlignment.Center
+AcquireLayout.Padding = UDim.new(0, 8)
+AcquireLayout.Parent = AcquireContent
+
+local AcquireIcon = Instance.new("ImageLabel")
+AcquireIcon.Size = UDim2.new(0, 16, 0, 16)
+AcquireIcon.BackgroundTransparency = 1
+AcquireIcon.Image = asset_mgr.get("external-link")
+AcquireIcon.ImageColor3 = Colors.TextPrimary
+AcquireIcon.LayoutOrder = 1
+AcquireIcon.Parent = AcquireContent
+
+local AcquireText = Instance.new("TextLabel")
+AcquireText.Size = UDim2.new(0, 0, 0, 20)
+AcquireText.AutomaticSize = Enum.AutomaticSize.X
+AcquireText.BackgroundTransparency = 1
+AcquireText.Text = "Get Key"
+AcquireText.TextColor3 = Colors.TextPrimary
+AcquireText.Font = Enum.Font.GothamBold
+AcquireText.TextSize = 13
+AcquireText.LayoutOrder = 2
+AcquireText.Parent = AcquireContent
+
+AcquireBtn.MouseEnter:Connect(function()
+    TweenService:Create(AcquireBtn, TweenInfo.new(0.3), {BackgroundColor3 = Colors.TertiaryBG}):Play()
+    TweenService:Create(AcquireStroke, TweenInfo.new(0.3), {Color = Colors.TextSecondary}):Play()
+end)
+AcquireBtn.MouseLeave:Connect(function()
+    TweenService:Create(AcquireBtn, TweenInfo.new(0.3), {BackgroundColor3 = Colors.SecondaryBG}):Play()
+    TweenService:Create(AcquireStroke, TweenInfo.new(0.3), {Color = Colors.Stroke}):Play()
+end)
+
+AcquireBtn.MouseButton1Click:Connect(function()
+    setclipboard(Config.KeyLink)
+    SpamSafeNotify("Link Copied", "The key link has been copied to your clipboard.", "Success", 3)
+end)
+
+local RedeemBtn = Instance.new("TextButton")
+RedeemBtn.Size = UDim2.new(1, 0, 0, 42)
+RedeemBtn.Position = UDim2.new(0, 0, 0, 180)
+RedeemBtn.BackgroundColor3 = Colors.Accent
+RedeemBtn.Text = ""
+RedeemBtn.AutoButtonColor = false
+RedeemBtn.Parent = BodyFrame
+
+local RedeemCorner = Instance.new("UICorner")
+RedeemCorner.CornerRadius = UDim.new(0, 8)
+RedeemCorner.Parent = RedeemBtn
+
+local RedeemContent = Instance.new("Frame")
+RedeemContent.Size = UDim2.new(1, 0, 1, 0)
+RedeemContent.BackgroundTransparency = 1
+RedeemContent.Parent = RedeemBtn
+
+local RedeemLayout = Instance.new("UIListLayout")
+RedeemLayout.FillDirection = Enum.FillDirection.Horizontal
+RedeemLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+RedeemLayout.VerticalAlignment = Enum.VerticalAlignment.Center
+RedeemLayout.Padding = UDim.new(0, 8)
+RedeemLayout.Parent = RedeemContent
+
+local RedeemIcon = Instance.new("ImageLabel")
+RedeemIcon.Size = UDim2.new(0, 16, 0, 16)
+RedeemIcon.BackgroundTransparency = 1
+RedeemIcon.Image = asset_mgr.get("book-key")
+RedeemIcon.ImageColor3 = Colors.TextPrimary
+RedeemIcon.LayoutOrder = 1
+RedeemIcon.Parent = RedeemContent
+
+local RedeemText = Instance.new("TextLabel")
+RedeemText.Size = UDim2.new(0, 0, 0, 20)
+RedeemText.AutomaticSize = Enum.AutomaticSize.X
+RedeemText.BackgroundTransparency = 1
+RedeemText.Text = "Verify Key"
+RedeemText.TextColor3 = Colors.TextPrimary
+RedeemText.Font = Enum.Font.GothamBold
+RedeemText.TextSize = 13
+RedeemText.LayoutOrder = 2
+RedeemText.Parent = RedeemContent
+
+RedeemBtn.MouseEnter:Connect(function()
+    TweenService:Create(RedeemBtn, TweenInfo.new(0.3, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {BackgroundColor3 = Colors.AccentGlow}):Play()
+end)
+RedeemBtn.MouseLeave:Connect(function()
+    TweenService:Create(RedeemBtn, TweenInfo.new(0.3, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {BackgroundColor3 = Colors.Accent}):Play()
+end)
+
+local Divider = Instance.new("Frame")
+Divider.Size = UDim2.new(1, 0, 0, 1)
+Divider.Position = UDim2.new(0, 0, 1, -45)
+Divider.BackgroundColor3 = Colors.Stroke
+Divider.BorderSizePixel = 0
+Divider.Parent = BodyFrame
+
+local LinksContainer = Instance.new("Frame")
+LinksContainer.Size = UDim2.new(1, 0, 0, 30)
+LinksContainer.Position = UDim2.new(0, 0, 1, -35)
+LinksContainer.BackgroundTransparency = 1
+LinksContainer.Parent = BodyFrame
+
+local UIListLayout = Instance.new("UIListLayout")
+UIListLayout.FillDirection = Enum.FillDirection.Horizontal
+UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout.Padding = UDim.new(0, 10)
+UIListLayout.Parent = LinksContainer
+
+local function CreateLinkButton(text, iconId)
+    local btn = Instance.new("TextButton")
+    btn.Size = UDim2.new(0, 70, 1, 0)
+    btn.BackgroundTransparency = 1
+    btn.Text = ""
+    
+    local layout = Instance.new("UIListLayout")
+    layout.FillDirection = Enum.FillDirection.Horizontal
+    layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+    layout.VerticalAlignment = Enum.VerticalAlignment.Center
+    layout.Padding = UDim.new(0, 6)
+    layout.Parent = btn
+    
+    local icon = Instance.new("ImageLabel")
+    icon.Size = UDim2.new(0, 14, 0, 14)
+    icon.BackgroundTransparency = 1
+    icon.Image = asset_mgr.get(iconId)
+    icon.ImageColor3 = Colors.TextSecondary
+    icon.Parent = btn
+    
+    local label = Instance.new("TextLabel")
+    label.Size = UDim2.new(0, 0, 1, 0)
+    label.AutomaticSize = Enum.AutomaticSize.X
+    label.BackgroundTransparency = 1
+    label.Text = text
+    label.TextColor3 = Colors.TextSecondary
+    label.Font = Enum.Font.GothamMedium
+    label.TextSize = 11
+    label.Parent = btn
+
+    btn.MouseEnter:Connect(function()
+        TweenService:Create(icon, TweenInfo.new(0.2), {ImageColor3 = Colors.TextPrimary}):Play()
+        TweenService:Create(label, TweenInfo.new(0.2), {TextColor3 = Colors.TextPrimary}):Play()
+    end)
+    btn.MouseLeave:Connect(function()
+        TweenService:Create(icon, TweenInfo.new(0.2), {ImageColor3 = Colors.TextSecondary}):Play()
+        TweenService:Create(label, TweenInfo.new(0.2), {TextColor3 = Colors.TextSecondary}):Play()
+    end)
+    
+    return btn
+end
+
+local ResetHwidBtn = CreateLinkButton("Reset HWID", "book-lock")
+ResetHwidBtn.Parent = LinksContainer
+
+local DiscordBtn = CreateLinkButton("Discord", "gamepad-2")
+DiscordBtn.Parent = LinksContainer
+
+local ProfileBtn = CreateLinkButton("User Info", "user")
+ProfileBtn.Parent = LinksContainer
+
+local lastNotifyTime = 0
+local function SpamSafeNotify(title, msg, type, dur)
+    if os.clock() - lastNotifyTime < 2 then return end
+    lastNotifyTime = os.clock()
+    Notify(title, msg, type, dur)
+end
+
+ResetHwidBtn.MouseButton1Click:Connect(function()
+    setclipboard(Config.ResetHWIDLink)
+    SpamSafeNotify("Link Copied", "Reset HWID URL copied to clipboard.", "Warn", 3)
+end)
+
+DiscordBtn.MouseButton1Click:Connect(function()
+    setclipboard(Config.DiscordLink)
+    SpamSafeNotify("Discord Copied", "Join our community! Link copied.", "Success", 3)
+end)
+
+ProfileBtn.MouseButton1Click:Connect(function()
+    isUserPanelOpen = not isUserPanelOpen
+    if isUserPanelOpen then
+        TweenService:Create(UserPanelStroke, TweenInfo.new(0.2), {Transparency = 0}):Play()
+        TweenService:Create(UserPanel, TweenInfo.new(0.5, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Size = UDim2.new(0, 200, 1, 0)}):Play()
+        TweenService:Create(MainContainer, TweenInfo.new(0.5, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Position = UDim2.new(0.5, -100, 0.5, 0)}):Play()
+    else
+        TweenService:Create(UserPanelStroke, TweenInfo.new(0.2), {Transparency = 1}):Play()
+        TweenService:Create(UserPanel, TweenInfo.new(0.5, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Size = UDim2.new(0, 0, 1, 0)}):Play()
+        TweenService:Create(MainContainer, TweenInfo.new(0.5, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Position = UDim2.new(0.5, 0, 0.5, 0)}):Play()
+    end
+end)
+
+local StatusSpinTween = nil
+
+local function ResetStatus()
+    if StatusSpinTween then StatusSpinTween:Cancel() end
+    TweenService:Create(StatusIcon, TweenInfo.new(0.3), {Rotation = 0}):Play()
+    StatusText.Text = "Waiting for authorization..."
+    StatusText.TextColor3 = Colors.TextSecondary
+    StatusIcon.Image = asset_mgr.get("shield")
+    StatusIcon.ImageColor3 = Colors.Warn
+    TweenService:Create(StatusStroke, TweenInfo.new(0.3), {Color = Colors.Stroke}):Play()
+end
+
+local function SetStatusLoading()
+    StatusText.Text = "Authenticating with server..."
+    StatusText.TextColor3 = Colors.TextPrimary
+    StatusIcon.Image = asset_mgr.get("loader-2")
+    StatusIcon.ImageColor3 = Colors.Accent
+    TweenService:Create(StatusStroke, TweenInfo.new(0.3), {Color = Colors.Accent}):Play()
+    StatusSpinTween = TweenService:Create(StatusIcon, TweenInfo.new(1, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, -1), {Rotation = 360})
+    StatusSpinTween:Play()
+end
+
+local isShaking = false
+local function ShakeInput()
+    if isShaking then return end
+    isShaking = true
+    local originalPos = UDim2.new(0, 0, 0, 70)
+    for i = 1, 4 do
+        TweenService:Create(InputFrame, TweenInfo.new(0.05), {Position = originalPos + UDim2.new(0, (i % 2 == 0) and -6 or 6, 0, 0)}):Play()
+        task.wait(0.05)
+    end
+    TweenService:Create(InputFrame, TweenInfo.new(0.05), {Position = originalPos}):Play()
+    TweenService:Create(InputStroke, TweenInfo.new(0.3), {Color = Colors.Error}):Play()
+    task.delay(1.5, function()
+        TweenService:Create(InputStroke, TweenInfo.new(0.3), {Color = Colors.Stroke}):Play()
+        isShaking = false
+    end)
+end
+
+local isAuthenticating = false
+local function ValidateKey(userKey)
+    if isAuthenticating then return end
+    isAuthenticating = true
+    
+    if not isSupported then
+        Notify("Unsupported", "This game is not currently supported by Pulsar X.", "Error", 5)
+        return
+    end
+
+    if typeof(userKey) ~= "string" or #userKey < 10 then
+        Notify("Invalid Input", "Please enter a valid key format.", "Error", 4)
+        ShakeInput()
+        isAuthenticating = false
+        return
+    end
+
+    userKey = userKey:gsub('"', ""):gsub("^%s+", ""):gsub("%s+$", "")
+
+    RedeemText.Text = "Verifying..."
+    SetStatusLoading()
+
+    local success, status = pcall(function()
+        return api.check_key(userKey)
+    end)
+
+    if not success then
+        if StatusSpinTween then StatusSpinTween:Cancel() end
+        StatusIcon.Rotation = 0
+        Notify("Connection Error", "Failed to reach the authentication servers.", "Error", 4)
+        StatusText.Text = "Connection Failed"
+        StatusText.TextColor3 = Colors.Error
+        StatusIcon.Image = asset_mgr.get("wifi-off")
+        StatusIcon.ImageColor3 = Colors.Error
+        TweenService:Create(StatusStroke, TweenInfo.new(0.3), {Color = Colors.Error}):Play()
+        
+        task.delay(3, ResetStatus)
+        RedeemText.Text = "Verify Key"
+        ShakeInput()
+        isAuthenticating = false
+        return
+    end
+
+    if status.code == "KEY_VALID" then
+        if StatusSpinTween then StatusSpinTween:Cancel() end
+        StatusIcon.Rotation = 0
+        
+        Notify("Access Granted", "Welcome back. Initiating systems...", "Success", 5)
+        RedeemText.Text = "Success!"
+        StatusText.Text = "Key Verified. Loading script..."
+        StatusText.TextColor3 = Colors.Success
+        StatusIcon.Image = asset_mgr.get("check")
+        StatusIcon.ImageColor3 = Colors.Success
+        
+        TweenService:Create(StatusStroke, TweenInfo.new(0.5), {Color = Colors.Success}):Play()
+        TweenService:Create(TopBar, TweenInfo.new(0.5), {BackgroundColor3 = Colors.Success}):Play()
+
+        if writefile then
+            writefile(Config.FileName, userKey)
+        end
+
+        task.spawn(function()
+            getgenv().script_key = userKey
+            if not getgenv().script_key then
+                script_key = userKey
+            end
+            api.load_script()
+        end)
+
+        task.wait(1.5)
+        CleanDestroy()
+    else
+        local errorMap = {
+            ["KEY_EXPIRED"] = "Your key has expired.",
+            ["KEY_HWID_LOCKED"] = "Key locked to another HWID.",
+            ["KEY_INCORRECT"] = "The key provided is incorrect.",
+            ["KEY_BANNED"] = "This key has been blacklisted.",
+            ["KEY_INVALID"] = "Invalid key format detected."
+        }
+        
+        local errorText = errorMap[status.code] or "Unknown Validation Error"
+        
+        if StatusSpinTween then StatusSpinTween:Cancel() end
+        StatusIcon.Rotation = 0
+        RedeemText.Text = "Verify Key"
+
+        Notify("Authentication Failed", errorText, "Error", 5)
+        StatusText.Text = errorText
+        StatusText.TextColor3 = Colors.Error
+        StatusIcon.Image = asset_mgr.get("alert-circle")
+        StatusIcon.ImageColor3 = Colors.Error
+        TweenService:Create(StatusStroke, TweenInfo.new(0.3), {Color = Colors.Error}):Play()
+        
+        ShakeInput()
+        task.delay(3, ResetStatus)
+        isAuthenticating = false
+    end
+end
+
+RedeemBtn.MouseButton1Click:Connect(function()
+    local userKey = KeyInput.Text:gsub(" ", "")
+    ValidateKey(userKey)
+end)
+
+task.spawn(function()
+    local foundKey = nil
+    if getgenv().script_key and #getgenv().script_key > 0 then
+        foundKey = getgenv().script_key
+    elseif script_key and #script_key > 0 then
+        foundKey = script_key
+    elseif isfile and isfile(Config.FileName) then
+        local content = readfile(Config.FileName)
+        if content and #content > 0 then
+            foundKey = content
+        end
+    end
+
+    if foundKey and #foundKey > 0 then
+        KeyInput.Text = foundKey
+        Notify("Auto-Login", "Found saved key, validating...", "Warn", 3)
+        ValidateKey(foundKey)
+    end
+end)
