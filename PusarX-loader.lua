@@ -1,4 +1,4 @@
---! Fixed loading
+--! NEW GAME
 if not LPH_OBFUSCATED then
     LPH_JIT = function(...) return (...) end;
     LPH_ENCSTR = function(...) return (...) end;
@@ -164,6 +164,7 @@ local gameIdToURL = {
     ["6391458589"] = "626411dc79e5f5381fd7ec25c8e10553",
     ["10093833731"] = "cb12c13a7e923106310362b89f94beb8",
     ["10067868611"] = "67abdc09ec99469ba156d58aaa2de054",
+    ["9907432116"] = "0fcf18c1d274f94ede49b84def65c62b",
 }
 
 local Config = {
