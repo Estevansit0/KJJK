@@ -1,4 +1,5 @@
---! NEW GAME
+--! NEW BAD GAME
+
 if not LPH_OBFUSCATED then
     LPH_JIT = function(...) return (...) end;
     LPH_ENCSTR = function(...) return (...) end;
@@ -165,6 +166,7 @@ local gameIdToURL = {
     ["10093833731"] = "cb12c13a7e923106310362b89f94beb8",
     ["10067868611"] = "67abdc09ec99469ba156d58aaa2de054",
     ["9907432116"] = "0fcf18c1d274f94ede49b84def65c62b",
+    ["8931286822"] = "f377b5fd4da9b8c9adb92cb0e8afdecb",
 }
 
 local Config = {
