@@ -1,4 +1,4 @@
---! NEW BAD GAME2
+--! ANOTHER RANDOM GAME
 
 if not LPH_OBFUSCATED then
     LPH_JIT = function(...) return (...) end;
@@ -168,6 +168,7 @@ local gameIdToURL = {
     ["9907432116"] = "0fcf18c1d274f94ede49b84def65c62b",
     ["8931286822"] = "f377b5fd4da9b8c9adb92cb0e8afdecb",
     ["9848850974"] = "9c2d1c999594f648703f5dc2c4db2f15",
+    ["9632442647"] = "828a65350e733c752868ffbb68ce7f0b",
 }
 
 local Config = {
